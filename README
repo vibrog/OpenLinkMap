@@ -41,3 +41,5 @@ Repository contains also data from other sources:
 * osmfilter, osmconvert, osmupdate from Markus Weber, available under GPLv3: http://wiki.openstreetmap.org/wiki/Osmfilter
 * OpenLayers, available under 2-clause BSD License (FreeBSD): http://openlayers.org/
 * osm2pgsql, available under GPLv2: http://wiki.openstreetmap.org/wiki/Osm2pgsql
+
+ATTENTION: The included binaries can only be used on i386 Linux systems. If you use other systems, you have to compile the programs for your environment.
