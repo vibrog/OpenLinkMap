@@ -49,8 +49,8 @@
 		}
 		fclose($file);
 		echo "Finished ".$type."...\n";
-		pg_close($connection);
 	}
+	pg_close($connection);
 
 
 	// connnecting to database
