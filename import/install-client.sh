@@ -84,4 +84,4 @@ scp -r nextobjects.csv w3_user1@matheisen-v1c-117.kunden.csl.de:/home/www/sites/
 scp -r timestamp w3_user1@matheisen-v1c-117.kunden.csl.de:/home/www/sites/194.245.35.149/site/import
 
 # start import
-ssh postgres@matheisen-v1c-117.kunden.csl.de "php /home/www/sites/194.245.35.149/site/import/install.php"
+ssh postgres@matheisen-v1c-117.kunden.csl.de "php /home/www/sites/194.245.35.149/site/import/import.php"

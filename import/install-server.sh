@@ -78,3 +78,9 @@ echo "CREATE ROLE apache;" | psql -d olm
 echo "GRANT SELECT ON nextobjects TO apache;" | psql -d nextobjects
 echo "GRANT SELECT ON nodes TO apache;" | psql -d olm
 echo "GRANT SELECT ON ways TO apache;" | psql -d olm
+
+echo "CREATE ROLE w3_user1;" | psql -d olm
+
+echo "GRANT SELECT ON nextobjects TO w3_user1;" | psql -d nextobjects
+echo "GRANT SELECT ON nodes TO w3_user1;" | psql -d olm
+echo "GRANT SELECT ON ways TO w3_user1;" | psql -d olm

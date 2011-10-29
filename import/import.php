@@ -30,7 +30,7 @@
 	}
 
 
-	$files = array("nodes", "ways");
+	$types = array("nodes", "ways");
 	foreach ($types as $type)
 	{
 		$file = fopen("olm-".$type.".csv", "r");
@@ -38,17 +38,13 @@
 		{
 			while (!feof($file))
 			{
-				$action = substr(fgets($file), 0, 1);
-				$line = str_replace("\;", "#semikolon#", substr(fgets($file), 2));
+				$line = str_replace("\;", "#semikolon#", fgets($file));
 				$data = explode(";", $line);
 
 				$tags = str_replace("#semikolon#", ";", $data[1]);
 				$tags = str_replace("'", "\\'", $tags);
 
-				if ($action == "<")
-					$result = pg_query($connection, "DELETE FROM ".$type." WHERE (id = '".$data[0]."')");
-				else if ($action == ">")
-					$result = pg_query($connection, "INSERT INTO ".$type." (id, tags, geom) VALUES ('".$data[0]."', '".$tags."', GeometryFromText('POINT ( ".$data[2]." ".$data[3]." )', 4326 ))");
+				$result = pg_query($connection, "INSERT INTO ".$type." (id, tags, geom) VALUES ('".$data[0]."', '".$tags."', GeometryFromText('POINT ( ".$data[2]." ".$data[3]." )', 4326 ))");
 			}
 		}
 		fclose($file);
@@ -71,17 +67,13 @@
 	{
 		while (!feof($file))
 		{
-			$action = substr(fgets($file), 0, 1);
-			$line = str_replace("\;", "#semikolon#", substr(fgets($file), 2));
+			$line = str_replace("\;", "#semikolon#", fgets($file));
 			$data = explode(";", $line);
 
 			$name = str_replace("#semikolon#", ";", $data[1]);
 			$name = str_replace("'", "\\'", $tags);
 
-			if ($action == "<")
-				$result = pg_query($connection, "DELETE FROM nextobjects WHERE (name = '".$name."') AND (geom = GeometryFromText('POINT ( ".$data[2]." ".$data[3]." )', 4326 )))");
-			else if ($action == ">")
-				$result = pg_query($connection, "INSERT INTO nextobjects (type, name, geom) VALUES ('".$data[0]."', '".$name."', GeometryFromText('POINT ( ".$data[2]." ".$data[3]." )', 4326 ))");
+			$result = pg_query($connection, "INSERT INTO nextobjects (type, name, geom) VALUES ('".$data[0]."', '".$name."', GeometryFromText('POINT ( ".$data[2]." ".$data[3]." )', 4326 ))");
 		}
 	}
 	fclose($file);
