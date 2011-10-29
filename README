@@ -1,0 +1,42 @@
+OPENLINKMAP
+===========
+OpenLinkMap Copyright (C) 2010 Alexander Matheisen
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it under certain conditions.
+See olm.openstreetmap.de/info for details.
+
+== Wo liegen welche Dateien? ==
+* /import enthält alles für den Import
+
+* /api enthält PHP-Dateien um Datenbank-Abfragen durchzuführen, die Inhalte der Popups zu generieren, den Timestamp des DB-Updates auszulesen, etc.
+* /builds enthält alle Versionen von OLM in gepackter Form
+* /css enthält alle Stylesheets
+* /img enthält alle benötigten Grafiken
+* /info enthält die Dokumentations- und Downloadseiten
+* /js enthält alle JavaScript-Dateien zur Kartenanzeige, etc. sowie die Übersetzungsdateien
+* /beta enthält experimentelle Versionen und wird zur Entwicklung genutzt; keine laufende Version, normalerweise per .htaccess gesperrt
+
+== Welche Datenbank(en) wird/werden verwendet? ==
+* verwendet wird die hstore Datenbank für die Popupdetails von nicht-OLM Objekten
+* für die Markerpositionen wird eine verkürzte Datenbank olm-list verwendet
+* für die Details und den Import wird die Datenbank olm benötigt
+
+== Wie ist das Projekt im Internet erreichbar? ==
+* Webseite ist erreichbar unter http://olm.openstreetmap.de/
+* experimentelle Versionen sind erreichbar unter http://olm.openstreetmap.de/beta/ (meistens mit .htaccess für fremde IPs gesperrt)
+
+== Link zu weiterführenden Informationen, wie z.B. Wikiseiten ==
+* http://olm.openstreetmap.de/info/
+* http://wiki.openstreetmap.org/wiki/OpenLinkMap
+
+== Informationen zur Lizenz (welche Open-Source-Lizenz wird verwendet?) ==
+* verwendet wird die GNU Public License v3, in Ausnahmefällen erlaube ich aber auch die Weiterverwendung unter anderen Bedingungen
+
+== Wo liegt der Source-Code? ==
+* jede Version in gepackter Form findet sich unter /builds bzw. zum Download unter http://olm.openstreetmap.de/info/index.html
+
+== Welche cronjobs werden verwendet? ==
+* zur Zeit keine
+
+== Welche langlaufenden daemons werden verwendet? ==
+* zur Zeit keine
