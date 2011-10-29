@@ -40,3 +40,4 @@ Repository contains also data from other sources:
 * The icon ist taken from the Oxygen-Iconset, available under LGPLv3: http://www.oxygen-icons.org/
 * osmfilter, osmconvert, osmupdate from Markus Weber, available under GPLv3: http://wiki.openstreetmap.org/wiki/Osmfilter
 * OpenLayers, available under 2-clause BSD License (FreeBSD): http://openlayers.org/
+* osm2pgsql, available under GPLv2: http://wiki.openstreetmap.org/wiki/Osm2pgsql
