@@ -9,19 +9,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<? echo $lang; ?>" lang="<? echo $lang; ?>">
 	<head>
-		<title>OpenLinkMap</title>
+		<title><?=$appname?></title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="content-language" content="<? echo $lang; ?>" />
 		<meta name="keywords" content="openstreetmap, openlinkmap, alexander matheisen, rurseekatze, openlayers, osm, matheisen, olm" />
-		<meta name="title" content="OpenLinkMap" />
+		<meta name="title" content="<?=$appname?>" />
 		<meta name="author" content="rurseekatze, Alexander Matheisen" />
 		<meta name="publisher" content="rurseekatze, Alexander Matheisen" />
 		<meta name="copyright" content="GNU General Public License v3" />
 		<meta name="revisit-after" content="after 90 days" />
 		<meta name="date" content="2010-01-01" />
-		<meta name="page-topic" content="OpenLinkMap" />
+		<meta name="page-topic" content="<?=$appname?>" />
 		<meta name="robots" content="index,follow" />
-		<meta name="generator" content="http://olm.openstreetmap.de/" />
 		<link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
 		<link rel="icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
 		<meta http-equiv="content-script-type" content="text/javascript" />
@@ -61,7 +60,7 @@
 		<div id="fullscreen" class="fullscreenOut"></div>
 		<div id="moreInfo" class="moreInfoFalse"></div>
 		<div id="sideBar" class="sideBar" onmouseover="hoverSidebar();" onmouseout="unhoverSidebar();">
-			<b id="header"><a href="index.php">OpenLinkMap</a></b>
+			<b id="header"><a href="index.php"><?=$appname?></a></b>
 			<br />
 			<p id="osm">Maps and data from <a href="http://www.openstreetmap.org/">OpenStreetMap</a>, released under the terms of <a href="http://creativecommons.org/licenses/by-sa/2.0/" title="CC-BY-SA 2.0">CC-BY-SA 2.0 License</a>.</p>
 			<a href="http://nrw.net/" id="poweredby"><img src="img/ad.png" /></a>

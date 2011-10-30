@@ -13,6 +13,8 @@
 	$langs = array("de", "en", "fr", "it");
 	// name of database
 	$db = "olm";
+	// name of application
+	$appname = "OpenLinkMap";
 
 
 	// connects do database
@@ -180,13 +182,13 @@
 		$ip = $_SERVER['REMOTE_ADDR'];
 
 		// generating message
-		$message = "An error happened at ".date("d.m.Y-H:i", time());
+		$message = "An error happened in ".$appname.".at ".date("d.m.Y-H:i", time());
 		$message .= "\n\n".$error;
 		$message .= "\n\nUser: http://www.utrace.de/?query=".$ip;
 		$message .= "\nWith header: ".$header;
 
 		// sending error report by mail to given mail address
-		$sended = mail($mail, "Error Report", $message);
+		$sended = mail($mail, "Error Report".$appname, $message);
 
 		// check if mail was being send
 		if(!$sended)
