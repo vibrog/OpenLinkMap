@@ -47,7 +47,7 @@ function createMap()
 	map.addControl(new OpenLayers.Control.MousePosition());
 	map.addControl(new OpenLayers.Control.LayerSwitcher());
 	map.addControl(new OpenLayers.Control.Permalink());
-	map.addControl(new OpenLayers.Control.Navigation());
+	map.addControl(new OpenLayers.Control.Navigation({dragPanOptions: {enableKinetic: true}}));
 
 	// adding map layers
 	var mapnikMap = new OpenLayers.Layer.OSM.Mapnik("Mapnik",
