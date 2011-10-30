@@ -303,6 +303,8 @@
 			return false;
 
 		$url = str_replace(" ", "_", rawurldecode($url));
+		// mobile version of wikipedia is easier to parse
+		$url = str_replace(".wikipedia.org", ".m.wikipedia.org", $url);
 
 		// download article
 		$response = apiRequest($url);
@@ -311,53 +313,16 @@
 		if ($content)
 		{
 			// delete everything before main article
-			$content = explode("<!-- bodytext -->", $content);
+			$content = explode("<!-- bodycontent -->", $content);
 
-			// delete after contents
-			$pos = strpos($content[1], "<table id=\"toc\" class=\"toc\">");
+			// delete tables before main article
+			$pos = strpos($content[1], "</table><p>");
+			if ($pos !== false)
+				$content = explode("</table><p>", $content[1]);
 
-			// if no string found
-			if ($pos === false)
-				$content[0] = $content[1];
-			else
-				$content = explode("<table id=\"toc\" class=\"toc\">", $content[1]);
+			// delete everything after first paragraph
+			$content = explode("</p>", $content[1]);
 
-			// delete tables before text
-			$pos = strpos($content[0], "</table>");
-
-			// if string not found
-			if ($pos === false)
-				$content[1]=$content[0];
-			else
-				$content = explode("</table>", $content[0]);
-
-			// text after last table
-			if ($content[5])
-				$content[4] = $content[5];
-			if ($content[4])
-				$content[3] = $content[4];
-			if ($content[3])
-				$content[2] = $content[3];
-			if ($content[2])
-				$content[1] = $content[2];
-
-			// delete damaged infobox
-			$pos = strpos($content[1], "<p><span style=\"display:none");
-
-			// if string not found
-			if ($pos === false)
-				echo "";
-			else
-				$content[1] = str_replace("<p><span style=\"display:none", "", $content[1]);
-
-			// delete everything before first part
-			$content = explode("<p>", $content[1]);
-			// delete everything after first part
-			$content = explode("\n", $content[1]);
-
-			// delete sources and footers
-			for ($j = 1; $j < 5; $j++)
-				$content[0] = str_replace("[".j."]", "", $content[0]);
 			return strip_tags($content[0]);
 		}
 
