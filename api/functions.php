@@ -315,15 +315,15 @@
 			// delete everything before main article
 			$content = explode("<!-- bodycontent -->", $content);
 
-			// delete tables before main article
-			$pos = strpos($content[1], "</table><p>");
-			if ($pos !== false)
-				$content = explode("</table><p>", $content[1]);
-
 			// delete everything after first paragraph
-			$content = explode("</p>", $content[1]);
+			$content = explode("<span class=\"mw-headline\"", $content[1]);
 
-			return strip_tags($content[0]);
+			// remove tables
+			$content = preg_replace("/<table\b[^>]*>.*<\/table>/s", "", $content[0]);
+			$content = preg_replace("/<span\b[^>]*>.*<\/span>/s", "", $content);
+			$content = preg_replace("/<sup\b[^>]*>.*<\/sup>/s", "", $content);
+
+			return trim(strip_tags($content));
 		}
 
 		return false;
@@ -337,6 +337,8 @@
 			return false;
 
 		$url = str_replace(" ", "_", rawurldecode($url));
+		// mobile version of wikipedia is easier to parse
+		$url = str_replace(".wikipedia.org", ".m.wikipedia.org", $url);
 
 		// download article
 		$response = apiRequest($url);
@@ -345,17 +347,17 @@
 		if ($content)
 		{
 			// delete everything before main article
-			$content = explode("<!-- bodytext -->", $content);
-			// delete everything after main article
-			$content = explode("<!-- \nNewPP limit report", $content[1]);
-			// delete after main article
-			$content = explode("<div class=\"visualClear\"></div>", $content[0]);
-			// delete image before article
-			$content = explode("http://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Disambig-dark.svg/25px-Disambig-dark.svg.png", $content[0]);
+			$content = explode("<!-- bodycontent -->", $content);
+
+			// delete everything after first paragraph
+			$content = explode("<span class=\"mw-headline\"", $content[1]);
+
+			// remove wikipedia images
+			$content = str_replace("<img alt=\"\" src=\"//upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Disambig-dark.svg/25px-Disambig-dark.svg.png\" width=\"25\" height=\"19\" />", "", $content[0]);
 
 			// get image url
 			$pattern = "/<img.+src=\"(\S+)\"\s\w+=.+>/i";
-			preg_match($pattern, $content[1], $matches);
+			preg_match($pattern, $content, $matches);
 
 			// change link from thumb-link to link to the big image
 			// if width was given in the image url
@@ -365,7 +367,8 @@
 				$image = substr($matches[1], 0, $pos);
 			}
 
-			return str_replace("thumb/", "", $image);
+			$image = str_replace("thumb/", "", $image);
+			return str_replace("//", "http://", $image);
 		}
 
 		return false;
