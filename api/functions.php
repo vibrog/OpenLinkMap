@@ -318,10 +318,11 @@
 			// delete everything after first paragraph
 			$content = explode("<span class=\"mw-headline\"", $content[1]);
 
-			// remove tables
+			// remove tables and other not needed elements
 			$content = preg_replace("/<table\b[^>]*>.*<\/table>/s", "", $content[0]);
 			$content = preg_replace("/<span\b[^>]*>.*<\/span>/s", "", $content);
 			$content = preg_replace("/<sup\b[^>]*>.*<\/sup>/s", "", $content);
+			$content = preg_replace("/<div.class=.thumbcaption\b[^>]*>.*<\/div>/s", "", $content);
 
 			return trim(strip_tags($content));
 		}
