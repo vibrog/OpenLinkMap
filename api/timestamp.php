@@ -66,7 +66,7 @@
 			$output = "<last_update>\n";
 
 			$output .= "<timestamp>\n";
-			$output .= "<unix>".$lastupdate."</unix>\n";
+			$output .= "<unix>".substr($lastupdate, 0, -1)."</unix>\n";
 			$output .= "<string>".timestampString($lastupdate, $offset)."</string>\n";
 			$output .= "</timestamp>\n";
 
