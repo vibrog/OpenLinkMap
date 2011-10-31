@@ -93,7 +93,7 @@
 		if ($name)
 		{
 			$output = xmlStart("names");
-			$output .= "<name id=\"".$id."\" type=\"".olm2osm($type)."\" olmtype=\"".$type."\"";
+			$output .= "<name id=\"".$id."\" type=\"".$type."\"";
 			if ($lang)
 				$output .= " lang=\"".$lang."\"";
 			$output .= ">".$name."</name>";
@@ -104,7 +104,7 @@
 		else
 		{
 			$output = xmlStart("names");
-			$output .= "<name id=\"".$id."\" type=\"".olm2osm($type)."\" olmtype=\"".$type."\"";
+			$output .= "<name id=\"".$id."\" type=\"".$type."\"";
 			if ($lang)
 				$output .= " lang=\"".$lang."\"";
 			$output .= ">NULL</name>";

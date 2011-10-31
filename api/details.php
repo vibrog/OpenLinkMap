@@ -85,7 +85,7 @@
 			if ($format == "text")
 				echo textDetailsOut($response[0], $langs, $offset);
 			else
-				echo xmlDetailsOut($response[0], $langs, $offset, $id, $type, $db);
+				echo xmlDetailsOut($response[0], $langs, $offset, $id, $type);
 
 			return true;
 		}
@@ -224,11 +224,11 @@
 
 
 	// output of details data in xml format
-	function xmlDetailsOut($response, $langs = "en", $offset = 0, $id, $type, $db)
+	function xmlDetailsOut($response, $langs = "en", $offset = 0, $id, $type)
 	{
 		if ($response)
 		{
-			$output = xmlStart("details database=\"".$db."\" id=\"".$id."\" type=\"".olm2osm($type)."\" olmtype=\"".$type."\"");
+			$output = xmlStart("details id=\"".$id."\" type=\"".$type."\"");
 
 			$name = getNameDetail(array($response["name1"], $response["name2"], $response["name3"], $response["name"]));
 

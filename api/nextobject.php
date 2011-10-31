@@ -116,7 +116,7 @@
 			{
 				$output .= "<".$singular.">\n";
 				$output .= "<id>".$entry[4]."</id>\n";
-				$output .= "<type>".olm2osm($entry[5])."</type>\n";
+				$output .= "<type>".$entry[5]."</type>\n";
 				$output .= "<lat>".$entry[1]."</lat>\n";
 				$output .= "<lon>".$entry[0]."</lon>\n";
 				if (!$entry[2])
