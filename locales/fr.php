@@ -354,6 +354,7 @@
 				"sandwich" => "Sandwich",
 				"seafood" => "Fruits de mer",
 				"spanish" => "Espagnol",
+				"sri_lankan" => "Sri lankais",
 				"steak_house" => "Steak",
 				"sushi" => "Sushi",
 				"thai" => "Thaïlandais",

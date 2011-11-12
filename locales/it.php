@@ -354,6 +354,7 @@
 				"sandwich" => "Tramezzini",
 				"seafood" => "Pescheria",
 				"spanish" => "Spagnola",
+				"sri_lankan" => "Sri Lanka",
 				"steak_house" => "Bistecche",
 				"sushi" => "Sushi",
 				"thai" => "Thai",
