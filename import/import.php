@@ -11,6 +11,8 @@
 	$mail = "AlexanderMatheisen@ish.de";
 	// name of application
 	$appname = "OpenLinkMap";
+	// id offset between nodes and centroids
+	$offset = 1000000000000000;
 
 	// connects do database
 	function connectToDatabase($dbname)
@@ -61,6 +63,8 @@
 	// copies a file to a database
 	function importOsmFile($filename, $db)
 	{
+		global $offset;
+
 		$connection = connectToDatabase($db);
 		// if there is no connection
 		if (!$connection)
@@ -81,17 +85,18 @@
 				if (substr(trim($line), 0, 5) == "<node")
 				{
 					$id = explode("\" lat", $line);
-					$id = intval(substr($id[0], 11))-1000000000000000;
+					$id = intval(substr($id[0], 11));
 					$lat = explode("\" lon=", $line);
 					$lat = explode("lat=\"", $lat[0]);
 					$lat = $lat[1];
 					$lon = explode("\" lon=\"", $line);
 					$lon = str_replace("\"/>", "", $lon[1]);
 					$lon = str_replace("\">", "", $lon);
-					if (substr($id, 0, 1) == "-")
+					if ($id > $offset)
 						$type = "ways";
 					else
 						$type = "nodes";
+					$id = $id-$offset;
 				}
 				else if (substr(trim($line), 0, 4) == "<tag")
 				{
