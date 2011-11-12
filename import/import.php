@@ -59,7 +59,7 @@
 	}
 
 	// copies a file to a database
-	function readFile($filename, $db)
+	function importOsmFile($filename, $db)
 	{
 		$connection = connectToDatabase($db);
 		// if there is no connection
@@ -81,7 +81,7 @@
 				if (substr(trim($line), 0, 5) == "<node")
 				{
 					$id = explode("\" lat", $line);
-					$id = substr($id[0], 11);
+					$id = intval(substr($id[0], 11))-1000000000000000;
 					$lat = explode("\" lon=", $line);
 					$lat = explode("lat=\"", $lat[0]);
 					$lat = $lat[1];
@@ -118,7 +118,7 @@
 		return false;
 	}
 
-	readFile("olm.osm", "olm");
-	readFile("nextobjects.osm", "nextobjects");
+	importOsmFile("olm.osm", "olm");
+	importOsmFile("nextobjects.osm", "nextobjects");
 	echo "Finished.\n";
 ?>
