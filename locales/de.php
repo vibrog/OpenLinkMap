@@ -105,7 +105,9 @@
 			"moreimages" => "Weitere Bilder",
 			"fullscreen" => "Vollbild",
 			"copyrightandbig" => "Lizenz, Autor, Originalseite...",
-			"unnamed" => "ohne Namen"
+			"unnamed" => "ohne Namen",
+			"nojavascriptheader" => "JavaScript ist nicht aktiviert.",
+			"nojavascripttext" => "JavaScript wird für diese Seite benötigt. Bitte schalten sie JavaScript in ihrem Browser ein."
 		),
 		"date" => array(
 			"seconds" => "Sekunden",

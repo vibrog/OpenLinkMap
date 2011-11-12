@@ -6,8 +6,8 @@
 	See olm.openstreetmap.de/info for details.
 	*/
 
-	
-	$translations = array(	
+
+	$translations = array(
 		"captions" => array(
 			"operator" => "Operatore",
 			"phone" => "Telefono",
@@ -105,7 +105,9 @@
 			"moreimages" => "Altre immagini",
 			"fullscreen" => "Schermo intero",
 			"copyrightandbig" => "Licenza, autore, pagina originale...",
-			"unnamed" => "senza nome"
+			"unnamed" => "senza nome",
+			"nojavascriptheader" => "JavaScript non è abilitato.",
+			"nojavascripttext" => "JavaScript è richiesto per la presentazione della pagina. si prega di abilitare javascript nel browser."
 		),
 		"date" => array(
 			"seconds" => "secondi",

@@ -6,8 +6,8 @@
 	See olm.openstreetmap.de/info for details.
 	*/
 
-	
-	$translations = array(	
+
+	$translations = array(
 		"captions" => array(
 			"operator" => "Operator",
 			"phone" => "Phone",
@@ -30,7 +30,7 @@
 			"stars" => "Stars",
 			"smoking" => "Smoking",
 			"smokingyes" => "allowed",
-			"nosmoking" => "prohibited",	
+			"nosmoking" => "prohibited",
 			"dedicatedsmoking" => "dedicated",
 			"separatedsmoking" => "Separated smoking area",
 			"isolatedsmoking" => "Isolated smoking area",
@@ -105,7 +105,9 @@
 			"moreimages" => "More Images",
 			"fullscreen" => "Fullscreen",
 			"copyrightandbig" => "License, author, original page...",
-			"unnamed" => "without name"
+			"unnamed" => "without name",
+			"nojavascriptheader" => "JavaScript is not activated.",
+			"nojavascripttext" => "JavaScript is needed to show the map and run this website. Please turn on JavaScript in your browser settings."
 		),
 		"date" => array(
 			"seconds" => "Seconds",

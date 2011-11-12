@@ -30,7 +30,7 @@
 			"stars" => "Étoiles",
 			"smoking" => "Fumer",
 			"smokingyes" => "autorisé",
-			"nosmoking" => "prohibé",	
+			"nosmoking" => "prohibé",
 			"dedicatedsmoking" => "souhaitable",
 			"separatedsmoking" => "Espace fumeurs",
 			"isolatedsmoking" => "Fumoir",
@@ -105,7 +105,9 @@
 			"moreimages" => "Plus de photos",
 			"fullscreen" => "Agrandir",
 			"copyrightandbig" => "License, auteur, original page...",
-			"unnamed" => "sans nom"
+			"unnamed" => "sans nom",
+			"nojavascriptheader" => "Javascript n'est pas activé.",
+			"nojavascripttext" => "JavaScript est nécessaire pour cette page. S'il vous plaît activer JavaScript dans votre navigateur."
 		),
 		"date" => array(
 			"seconds" => "Secondes",

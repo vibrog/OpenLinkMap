@@ -89,11 +89,7 @@
 		<div class="hideSidebarButton" id="hideSidebarButton" onclick="hideSideBar();" title="Hide"><b id="hideText">«</b></div>
 		<div id="mapFrame" class="mapFrame">
 			<noscript>
-				<p><b>JavaScript is not activated.</b><br /> JavaScript is needed to show the map and run this application. Please turn on JavaScript in your browser settings.</p>
-				<br />
-				<p><b>JavaScript ist nicht aktiviert.</b><br /> JavaScript wird für diese Seite benötigt. Bitte schalten sie JavaScript in ihrem Browser ein.</p>
-				<br />
-				<p><b>Javascript n'est pas activé.</b><br />JavaScript est nécessaire pour cette page. S'il vous plaît activer JavaScript dans votre navigateur.</p>
+				<p><b><?=$translations['captions']['nojavascriptheader']?></b><br /><?=$translations['captions']['nojavascripttext']?></p>
 			</noscript>
 		</div>
 		<b class="errorBarFalse" id="errorBar"></b>
