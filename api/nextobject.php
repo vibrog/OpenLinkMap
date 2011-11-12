@@ -46,10 +46,10 @@
 	if (!$connection)
 		exit;
 
-	$next['busstops'] = getNearObjectsForId($connection, $id, array("bus_stop", "bus_station"), $type);
-	$next['stations'] = getNearObjectsForId($connection, $id, array("station", "halt"), $type);
-	$next['tramhalts'] = getNearObjectsForId($connection, $id, array("tram_stop"), $type);
-	$next['parkings'] = getNearObjectsForId($connection, $id, array("parking"), $type);
+	$next['busstops'] = getNearObjectsForId($connection, $lat, $lon, array("bus_stop", "bus_station"));
+	$next['stations'] = getNearObjectsForId($connection, $lat, $lon, array("station", "halt"));
+	$next['tramhalts'] = getNearObjectsForId($connection, $lat, $lon, array("tram_stop"));
+	$next['parkings'] = getNearObjectsForId($connection, $lat, $lon, array("parking"));
 
 	pg_close($connection);
 

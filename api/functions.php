@@ -176,6 +176,7 @@
 	function reportError($error = "")
 	{
 		global $mail;
+		global $appname;
 
 		// get ip and user agent string
 		$header = $_SERVER['HTTP_USER_AGENT'];
@@ -657,8 +658,8 @@
 	}
 
 
-	// get objects near a given object which have given tags
-	function getNearObjectsForId($connection, $id, $types, $source)
+	// get objects near a given object which have are of a given type
+	function getNearObjectsForId($connection, $lat, $lon, $types)
 	{
 		// combine tags to one request
 		$command = array();
@@ -671,20 +672,23 @@
 		$typequery .= "h.type = '".$types[$typecount-1]."'";
 
 		$query = "SELECT
-							ST_X(foo.next),
-							ST_Y(foo.next),
-							foo.name,
-							foo.distance,
-							foo.osmid,
-							foo.type
-							FROM (
-								SELECT s.id, h.id AS osmid, name AS name, h.geom AS next, h.type AS type ST_Distance_Sphere(s.geom, h.geom) AS distance
-								FROM ".$source."s AS s, nextobjects AS h
-								WHERE s.id = ".$id." AND (".$typequery.") AND h.geom && ST_Buffer(".substr($centroid, 13, -1).", 2000)
-								ORDER BY distance
-								LIMIT 2
-							) AS foo;";
-
+						ST_X(foo.next),
+						ST_Y(foo.next),
+						foo.name,
+						foo.distance,
+						foo.osmid,
+						foo.type
+					FROM (
+						SELECT name AS name, ST_X(geom), ST_Y(geom), AS next, type AS type ST_Distance_Sphere(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), geom) AS distance
+						FROM nodes
+						WHERE (".$typequery.") AND ST_IsValid(geom) && ST_Buffer(".substr($centroid, 13, -1).", 2000)
+						ORDER BY distance
+						LIMIT 2
+					) AS foo;";
+// nodes und ways
+// int. namen
+// tag abfrage
+// type nicht zurückgeben
 		$result = pg_query($connection, $query);
 		$response = pg_fetch_all($result);
 		if ($response)
@@ -696,7 +700,7 @@
 				$data[2] = $element['name'];
 				$data[3] = $element['distance'];
 				$data[4] = $element['osmid'];
-				$data[5] = $element['type'];
+				$data[5] = "bla";
 
 				array_push($objects, $data);
 			}
