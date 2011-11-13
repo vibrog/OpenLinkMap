@@ -62,7 +62,7 @@
 	}
 
 	// copies a file to a database
-	function importOsmFile($filename, $db)
+	function updateOsmFile($filename, $db)
 	{
 		global $offset;
 		global $offsetfactorrels;
@@ -79,10 +79,6 @@
 		if ($file)
 		{
 			$tags = '';
-			$result = pg_query($connection, "TRUNCATE nodes");
-			$result = pg_query($connection, "TRUNCATE ways");
-			$result = pg_query($connection, "TRUNCATE relations");
-
 			while (!feof($file))
 			{
 				$line = fgets($file);
@@ -99,7 +95,7 @@
 					$lon = str_replace("\"/>", "", $lon[1]);
 					$lon = str_replace("\">", "", $lon);
 
-					if ($id > ($offset*$offsetfactorrels))
+					if ($id > $offset*$offsetfactorrels)
 						$type = "relations";
 					else if ($id > $offset)
 						$type = "ways";
@@ -121,8 +117,28 @@
 				}
 				else if (trim($line) == "</node>")
 				{
-					$result = pg_query($connection, "INSERT INTO ".$type." (id, tags, geom) VALUES ('".$id."', '".$tags."', GeometryFromText('POINT ( ".$lon." ".$lat." )', 4326 ))");
+					if ($action == 0)
+						$result = pg_query($connection, "INSERT INTO ".$type." (id, tags, geom) VALUES ('".$id."', '".$tags."', GeometryFromText('POINT ( ".$lon." ".$lat." )', 4326 ))");
+					else if ($action == 2)
+						$result = pg_query($connection, "DELETE FROM ".$type." WHERE (id = '".$id."')");
+					else if ($action == 1)
+					{
+						$result = pg_query($connection, "DELETE FROM ".$type." WHERE (id = '".$id."')");
+						$result = pg_query($connection, "INSERT INTO ".$type." (id, tags, geom) VALUES ('".$id."', '".$tags."', GeometryFromText('POINT ( ".$lon." ".$lat." )', 4326 ))");
+					}
 					$tags = '';
+				}
+				else if (substr(trim($line), 0, 5) == "<create")
+				{
+					$action = 0;
+				}
+				else if (substr(trim($line), 0, 5) == "<modify")
+				{
+					$action = 1;
+				}
+				else if (substr(trim($line), 0, 5) == "<delete")
+				{
+					$action = 2;
 				}
 			}
 		}
@@ -136,7 +152,7 @@
 		return false;
 	}
 
-	importOsmFile("old-olm.osm", "olm");
-	importOsmFile("old-nextobjects.osm", "nextobjects");
+	updateOsmFile("olm.osc", "olm");
+	updateOsmFile("nextobjects.osc", "nextobjects");
 	echo "Finished.\n";
 ?>

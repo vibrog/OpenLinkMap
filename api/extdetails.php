@@ -804,11 +804,11 @@
 			// wikipedia
 			if ($wikipedia)
 			{
-				$output .= "<wikipedia:part>\n";
-					$output .= "<wikipedia>".$wikipedia[1]."</wikipedia>\n";
+				$output .= "<wikipedia>\n";
+					$output .= "<url>".$wikipedia[1]."</url>\n";
 					// request first lines
 					$output .= "<text>".getWikipediaBeginning($wikipedia[1])."</text>\n";
-				$output .= "</wikipedia:part>\n";
+				$output .= "</wikipedia>\n";
 			}
 
 			// image, only images from wikimedia are supported

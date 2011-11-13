@@ -189,7 +189,7 @@
 		$message .= "\nWith header: ".$header;
 
 		// sending error report by mail to given mail address
-		$sended = mail($mail, "Error Report".$appname, $message);
+		$sended = mail($mail, "Error Report ".$appname, $message);
 
 		// check if mail was being send
 		if(!$sended)
@@ -395,30 +395,21 @@
 		}
 
 		// requests
-		$requests[0] = array(
-			"SELECT ST_X(geom), ST_Y(geom), id
-			FROM nodes
-			WHERE geom && ST_SetSRID(ST_MakeBox2D(ST_Point(".$bbox[0].",".$bbox[1]."), ST_Point(".$bbox[2].",".$bbox[3].")), 4326);",
-			"node"
-		);
-		$requests[1] = array(
-			"SELECT ST_X(geom), ST_Y(geom), id
-			FROM ways
-			WHERE geom && ST_SetSRID(ST_MakeBox2D(ST_Point(".$bbox[0].",".$bbox[1]."), ST_Point(".$bbox[2].",".$bbox[3].")), 4326);",
-			"way"
-		);
+		$types = array("node", "way", "relation");
 
 		// executing requests
-		foreach ($requests as $request)
+		foreach ($types as $type)
 		{
-			$response = requestDetails($request[0], $connection);
+			$response = requestDetails("SELECT ST_X(geom), ST_Y(geom), id
+											FROM ".$type."s
+											WHERE geom && ST_SetSRID(ST_MakeBox2D(ST_Point(".$bbox[0].",".$bbox[1]."), ST_Point(".$bbox[2].",".$bbox[3].")), 4326);", $connection);
 
 			// putting out the results
 			if ($response)
 			{
 				foreach ($response as $element)
 				{
-					$list .= $element['st_x']."|".$element['st_y']."|".$element['id']."|".$request[1]."<br/>";
+					$list .= $element['st_x']."|".$element['st_y']."|".$element['id']."|".$type."<br/>";
 				}
 			}
 
@@ -950,12 +941,8 @@
 		if (!$type)
 			return false;
 
-		// relations are not supported, but it is not an error
-		if ($type == "relation")
-			return false;
-
 		// check if given object type is invalid
-		if (($type != "node") && ($type != "way"))
+		if (($type != "node") && ($type != "way") && ($type != "relation"))
 		{
 			reportError("Given type was invalid: ".$type);
 			return false;
