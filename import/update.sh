@@ -9,8 +9,6 @@
 # working directory, please change
 cd /home/www/sites/194.245.35.149/site/import
 PATH="$PATH:/home/www/sites/194.245.35.149/site/import/bin"
-JAVACMD_OPTIONS=-Djava.io.tmpdir=/home/www/sites/194.245.35.149/site/
-export JAVACMD_OPTIONS
 
 
 
