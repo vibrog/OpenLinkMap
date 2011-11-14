@@ -16,9 +16,11 @@ function Fullscreen(frame, image)
 		this.frame.innerHTML = "<img id='fullscreenImg' src='"+this.url+"' />";
 
 		var fullscreenimg = gEBI("fullscreenImg");
-		fullscreenimg.onclick = new Function("self.hide();");
+		fullscreenimg.onclick = function()
+		{
+			self.hide();
+		};
 		fullscreenimg.title = translations['close'];
-		gEBI("fullscreenClose").onclick = new Function("self.hide();");
 	}
 
 	// hides the fullscreen view of an image
@@ -27,22 +29,25 @@ function Fullscreen(frame, image)
 		var self = this;
 		this.frame.className = "fullscreenOut";
 		this.frame.innerHTML = "";
-		gEBI("fullscreenImg").onclick = new Function("self.show('"+this.url+"');");
+		gEBI("fullscreenImg").onclick = function()
+		{
+			self.show(this.url);
+		};
 	}
 
 	// inits the events
 	this.init = function()
 	{
-		this.url = getWikipediaImageUrl(this.image.src);
+		this.url = getWikipediaImageUrl(gEBI(this.image).src);
 
 		var self = this;
-		this.image.onclick = function()
+		gEBI(this.image).onclick = function()
 		{
 			self.show(this.url);
 		};
 	}
 
 
+	this.image = image;
 	this.frame = gEBI(frame);
-	this.image = gEBI(image);
 }

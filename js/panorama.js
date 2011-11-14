@@ -12,13 +12,28 @@ function Panorama(frame, image)
 	this.show = function()
 	{
 		var self = this;
-		this.frame.className = "fullscreen";
-		this.frame.innerHTML = "<img id='fullscreenImg' src='"+this.url+"' />";
 
+		this.frame.className = "fullscreen";
+		this.map = new OpenLayers.Map(this.frame);
+		this.layer = new OpenLayers.Layer.Image(
+			'Panorama',
+			this.url,
+			new OpenLayers.Bounds(-180, -88.759, 180, 88.759), new OpenLayers.Size(580, 288), {numZoomLevels: 3}
+		);
+		map.addLayers([this.layer]);
+		map.zoomToMaxExtent();
+		/*
 		var fullscreenimg = gEBI("fullscreenImg");
-		fullscreenimg.onclick = new Function("self.hide();");
+		fullscreenimg.onclick = function()
+		{
+			self.hide();
+		};
 		fullscreenimg.title = translations['close'];
-		gEBI("fullscreenClose").onclick = new Function("self.hide();");
+		gEBI("fullscreenClose").onclick = function()
+		{
+			self.hide();
+		};
+		*/
 	}
 
 	// hides the fullscreen view of an image
@@ -27,31 +42,25 @@ function Panorama(frame, image)
 		var self = this;
 		this.frame.className = "fullscreenOut";
 		this.frame.innerHTML = "";
-		gEBI("fullscreenImg").onclick = new Function("self.show('"+this.url+"');");
+		gEBI("fullscreenImg").onclick = function()
+		{
+			self.show(this.url);
+		};
 	}
 
 	// inits the events
 	this.init = function()
 	{
+		this.url = getWikipediaImageUrl(gEBI(this.image).src);
+
 		var self = this;
-		this.url = getWikipediaImageUrl(this.image.src);
-
-		var map = new OpenLayers.Map(this.frame);
-		this.layer = new OpenLayers.Layer.Image(
-			'City Lights',
-			this.url,
-			new OpenLayers.Bounds(-180, -88.759, 180, 88.759), new OpenLayers.Size(580, 288), {numZoomLevels: 3}
-		);
-		map.addLayers([layer]);
-		map.zoomToMaxExtent();
-
-		this.image.onclick = function()
+		gEBI(this.image).onclick = function()
 		{
 			self.show(this.url);
 		};
 	}
 
 
+	this.image = image;
 	this.frame = gEBI(frame);
-	this.image = gEBI(image);
 }
