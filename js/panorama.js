@@ -8,20 +8,22 @@ See olm.openstreetmap.de/info for details.
 
 function Panorama(frame, image)
 {
-	// shows the fullscreen view of an image
+	// shows the panorama
 	this.show = function()
 	{
 		var self = this;
 
-		this.frame.className = "fullscreen";
-		this.map = new OpenLayers.Map(this.frame);
+		this.frame.className = "panorama";
+		this.panorama = new OpenLayers.Map(this.frameName);
 		this.layer = new OpenLayers.Layer.Image(
 			'Panorama',
 			this.url,
-			new OpenLayers.Bounds(-180, -88.759, 180, 88.759), new OpenLayers.Size(580, 288), {numZoomLevels: 3}
+			new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
+			new OpenLayers.Size(580, 288),
+			{numZoomLevels: 3}
 		);
-		map.addLayers([this.layer]);
-		map.zoomToMaxExtent();
+		this.panorama.addLayer(this.layer);
+		this.panorama.zoomToMaxExtent();
 		/*
 		var fullscreenimg = gEBI("fullscreenImg");
 		fullscreenimg.onclick = function()
@@ -36,7 +38,7 @@ function Panorama(frame, image)
 		*/
 	}
 
-	// hides the fullscreen view of an image
+	// hides the panorama
 	this.hide = function()
 	{
 		var self = this;
@@ -62,5 +64,6 @@ function Panorama(frame, image)
 
 
 	this.image = image;
+	this.frameName = frame;
 	this.frame = gEBI(frame);
 }

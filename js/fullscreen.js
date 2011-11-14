@@ -43,7 +43,7 @@ function Fullscreen(frame, image)
 		var self = this;
 		gEBI(this.image).onclick = function()
 		{
-			self.show(this.url);
+			self.show(self.url);
 		};
 	}
 
