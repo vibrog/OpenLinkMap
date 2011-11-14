@@ -33,7 +33,7 @@ function Fullscreen(frame, image)
 	// inits the events
 	this.init = function()
 	{
-		this.url = this.image.src;
+		this.url = getWikipediaImageUrl(this.image.src);
 
 		var self = this;
 		this.image.onclick = function()

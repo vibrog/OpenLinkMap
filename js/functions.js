@@ -591,3 +591,15 @@ function queryLatLonZoom(lat, lon, zoom)
 {
 	return queryLatLon(lat, lon)+"&zoom="+zoom;
 }
+
+
+// gets the url of an wikipedia image by it's thumbnail url
+function getWikipediaImageUrl(url)
+{
+	if (!url)
+		return false;
+
+	var url = url.replace("wikipedia/commons/thumb", "wikipedia/commons");
+
+	return url.substr(0, url.lastIndexOf("/"));
+}

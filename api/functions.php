@@ -377,6 +377,19 @@
 	}
 
 
+	// gets the url of an image's thumbnail
+	function getWikipediaThumbnailUrl($url)
+	{
+		if (!$url)
+			return false;
+
+		$url = str_replace("wikipedia/commons", "wikipedia/commons/thumb", $url);
+		$filename = explode("/", $url);
+
+		return $url."/300px-".$filename[count($filename)-1];
+	}
+
+
 	// request all objects with given tags for a given bbox and echo them
 	function getObjectsForBbox($connection, $bbox)
 	{

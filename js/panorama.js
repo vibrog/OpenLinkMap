@@ -34,7 +34,7 @@ function Panorama(frame, image)
 	this.init = function()
 	{
 		var self = this;
-		this.url = this.image.src;
+		this.url = getWikipediaImageUrl(this.image.src);
 
 		var map = new OpenLayers.Map(this.frame);
 		this.layer = new OpenLayers.Layer.Image(
