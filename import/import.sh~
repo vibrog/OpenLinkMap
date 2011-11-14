@@ -64,7 +64,7 @@ echo ""
 # importing in database, ~ 20 min
 echo "Importing in database"
 echo ""
-php import.php
+php newolm-import.php
 rm old-olm.osm
 rm old-nextobjects.osm
 echo ""

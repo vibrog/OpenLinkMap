@@ -184,10 +184,10 @@ function createMap()
 	search = new Search(map, "searchBox", "searchBar", "searchButton", "clearButton", "searchOption");
 
 	// adding fullscreen feature
-	fullscreen = new Fullscreen("fullscreen", "moreImage");
+	//fullscreen = new Fullscreen("fullscreen", "moreImage");
 
 	// adding panorama feature
-	panorama = new Panorama("fullscreen", "morePanorama");
+	//panorama = new Panorama("fullscreen", "morePanorama");
 }
 
 
@@ -467,8 +467,8 @@ function showMoreInfo(id, type, lat, lon)
 			{
 				detailsbar.innerHTML = content;
 				detailsbar.innerHTML += "<div class='loadingMoreInfo'>"+loading+"</div>";
-				fullscreen.init();
-				panorama.init();
+				//fullscreen.init();
+				//panorama.init();
 			}
 			else
 			{

@@ -57,7 +57,6 @@
 		<script type="text/javascript" src="js/timestamp.js"></script>
 		<script type="text/javascript" src="js/format.js"></script>
 		<script type="text/javascript" src="js/fullscreen.js"></script>
-		<script type="text/javascript" src="js/panorama.js"></script>
 		<script type="text/javascript" src="js/functions.js"></script>
 	</head>
 	<body onload="createMap();">

@@ -6,10 +6,10 @@ See olm.openstreetmap.de/info for details.
 */
 
 
-function Panorama(frame, image)
+function Fullscreen(frame, image)
 {
 	// shows the fullscreen view of an image
-	this.show = function()
+	this.show = function(url)
 	{
 		var self = this;
 		this.frame.className = "fullscreen";
@@ -33,18 +33,9 @@ function Panorama(frame, image)
 	// inits the events
 	this.init = function()
 	{
-		var self = this;
 		this.url = this.image.src;
 
-		var map = new OpenLayers.Map(this.frame);
-		this.layer = new OpenLayers.Layer.Image(
-			'City Lights',
-			this.url,
-			new OpenLayers.Bounds(-180, -88.759, 180, 88.759), new OpenLayers.Size(580, 288), {numZoomLevels: 3}
-		);
-		map.addLayers([layer]);
-		map.zoomToMaxExtent();
-
+		var self = this;
 		this.image.onclick = function()
 		{
 			self.show(this.url);

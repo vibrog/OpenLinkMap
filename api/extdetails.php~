@@ -531,7 +531,7 @@
 				$output .= "<div class=\"moreInfoBox\">\n";
 				$output .= "<table>\n";
 					$output .= "<tr><td><strong>".$translations['captions']['panorama']."</strong></td></tr>\n";
-					$output .= "<tr><td><img id=\"morePanorama\" title=\"".$translations['captions']['fullscreen']."\" src=\"".$response['panorama']."\" /></a></td></tr>\n";
+					$output .= "<tr><td><img id=\"morePanorama\" onclick=\"showPanorama('".$response['image']."');\" title=\"".$translations['captions']['fullscreen']."\" src=\"".$response['panorama']."\" /></a></td></tr>\n";
 					$output .= "<tr><td><a target=\"_blank\" href=\"http://commons.wikimedia.org/wiki/File:".$attribution[7]."\">".$translations['captions']['copyrightandbig']."</a></td></tr>\n";
 				$output .= "</table>\n";
 				$output .= "</div>\n";

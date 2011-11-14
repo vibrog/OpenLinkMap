@@ -33,18 +33,10 @@ function Panorama(frame, image)
 	// inits the events
 	this.init = function()
 	{
-		var self = this;
 		this.url = this.image.src;
+		this.layer.setUrl(this.url);
 
-		var map = new OpenLayers.Map(this.frame);
-		this.layer = new OpenLayers.Layer.Image(
-			'City Lights',
-			this.url,
-			new OpenLayers.Bounds(-180, -88.759, 180, 88.759), new OpenLayers.Size(580, 288), {numZoomLevels: 3}
-		);
-		map.addLayers([layer]);
-		map.zoomToMaxExtent();
-
+		var self = this;
 		this.image.onclick = function()
 		{
 			self.show(this.url);
@@ -54,4 +46,14 @@ function Panorama(frame, image)
 
 	this.frame = gEBI(frame);
 	this.image = gEBI(image);
+
+	var map = new OpenLayers.Map(this.frame);
+	this.layer = new OpenLayers.Layer.Image(
+		'City Lights',
+		"",
+		new OpenLayers.Bounds(-180, -88.759, 180, 88.759), new OpenLayers.Size(580, 288), {numZoomLevels: 3}
+	);
+
+	map.addLayers([layer]);
+	map.zoomToMaxExtent();
 }
