@@ -161,7 +161,7 @@ noscript p
 	text-decoration: underline;
 }
 
-.openinghours
+.openinghours, .servicetimes
 {
 	margin-top: 10px;
 	font-size: 10px;
@@ -756,24 +756,7 @@ noscript p
 	max-height: 12px;
 }
 
-.fullscreen
-{
-	position: fixed;
-	left: 0px;
-	right: 0px;
-	top: 0px;
-	bottom: 0px;
-	background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.7) 0, rgba(0, 0, 0, 0.7) 67%, rgba(0, 0, 0, 0.7) 100%);
-	background: -webkit-gradient(linear,
-		left top, left bottom,
-		color-stop(0, rgba(0, 0, 0, 0.7)),
-		color-stop(0.67, rgba(0, 0, 0, 0.7)),
-		color-stop(1, rgba(0, 0, 0, 0.7)));
-	text-align: center;
-	z-index: 10000;
-}
-
-.panorama
+.fullscreen, .panorama
 {
 	position: fixed;
 	left: 0px;
