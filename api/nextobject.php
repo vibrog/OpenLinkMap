@@ -19,14 +19,6 @@
 
 	date_default_timezone_set('UTC');
 
-
-	// prohibition of sql injections
-	if (!isValidType($type) || !isValidId($id))
-	{
-		echo "NULL";
-		exit;
-	}
-
 	// request latlon if not given
 	if (!$lat || !$lon)
 	{
@@ -41,15 +33,33 @@
 		$langs[0] = $_GET['lang'];
 
 	// connnecting to database
-	$connection = connectToDatabase($db);
+	$connection = connectToDatabase("nextobjects");
 	// if there is no connection
 	if (!$connection)
 		exit;
 
-	$next['busstops'] = getNearObjectsForId($connection, $lat, $lon, array("bus_stop", "bus_station"));
-	$next['stations'] = getNearObjectsForId($connection, $lat, $lon, array("station", "halt"));
-	$next['tramhalts'] = getNearObjectsForId($connection, $lat, $lon, array("tram_stop"));
-	$next['parkings'] = getNearObjectsForId($connection, $lat, $lon, array("parking"));
+	$next['busstops'] = getNearObjectsForId($connection, $lat, $lon,
+							array(
+								array("highway", "bus_stop"),
+								array("highway", "bus_station")
+							)
+						);
+	$next['stations'] = getNearObjectsForId($connection, $lat, $lon,
+							array(
+								array("railway", "station"),
+								array("railway", "halt")
+							)
+						);
+	$next['tramhalts'] = getNearObjectsForId($connection, $lat, $lon,
+							array(
+								array("railway", "tram_stop")
+							)
+						);
+	$next['parkings'] = getNearObjectsForId($connection, $lat, $lon,
+							array(
+								array("amenity", "parking")
+							)
+						);
 
 	pg_close($connection);
 
@@ -116,7 +126,6 @@
 			{
 				$output .= "<".$singular.">\n";
 				$output .= "<id>".$entry[4]."</id>\n";
-				$output .= "<type>".$entry[5]."</type>\n";
 				$output .= "<lat>".$entry[1]."</lat>\n";
 				$output .= "<lon>".$entry[0]."</lon>\n";
 				if (!$entry[2])

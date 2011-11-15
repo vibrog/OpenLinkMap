@@ -663,36 +663,30 @@
 
 
 	// get objects near a given object which have are of a given type
-	function getNearObjectsForId($connection, $lat, $lon, $types)
+	function getNearObjectsForId($connection, $lat, $lon, $tags)
 	{
 		// combine tags to one request
 		$command = array();
 		$objects = array();
-		$typecount = count($types);
+		$tagcount = count($tags);
 
-		// consturct query from array
-		for ($i=0; $i<$typecount-1; $i++)
-			$typequery .= "h.type = '".$types[$i]."' OR ";
-		$typequery .= "h.type = '".$types[$typecount-1]."'";
+		// construct query from array
+		for ($i=0; $i<$tagcount-1; $i++)
+			$tagquery .= "tags-> '".$tags[$i][0]."' = '".$tags[$i][1]."' OR ";
+		$tagquery .= "tags-> '".$tags[$i][0]."' = '".$tags[$i][1]."'";
 
 		$query = "SELECT
 						ST_X(foo.next),
 						ST_Y(foo.next),
 						foo.name,
 						foo.distance,
-						foo.osmid,
-						foo.type
+						foo.osmid
 					FROM (
-						SELECT name AS name, ST_X(geom), ST_Y(geom), AS next, type AS type ST_Distance_Sphere(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), geom) AS distance
+						SELECT tags->'name' AS name, geom AS next, id AS osmid,  ST_Distance_Sphere(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), geom) AS distance
 						FROM nodes
-						WHERE (".$typequery.") AND ST_IsValid(geom) && ST_Buffer(".substr($centroid, 13, -1).", 2000)
-						ORDER BY distance
-						LIMIT 2
-					) AS foo;";
-// nodes und ways
-// int. namen
-// tag abfrage
-// type nicht zurückgeben
+						WHERE (".$tagquery.") AND geom && ST_Buffer(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), 2000)
+					) AS foo ORDER BY foo.distance LIMIT 2;";
+
 		$result = pg_query($connection, $query);
 		$response = pg_fetch_all($result);
 		if ($response)
@@ -704,7 +698,6 @@
 				$data[2] = $element['name'];
 				$data[3] = $element['distance'];
 				$data[4] = $element['osmid'];
-				$data[5] = "bla";
 
 				array_push($objects, $data);
 			}
