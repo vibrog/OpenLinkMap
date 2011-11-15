@@ -369,12 +369,6 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 		this.setBounded(1);
 
 	// set up key event
-	this.box.onkeypress =
-		function(key)
-		{
-			if (key.which == "13")
-				self.send();
-		};
 	this.box.onkeydown =
 		function()
 		{
