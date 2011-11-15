@@ -773,7 +773,7 @@ noscript p
 	z-index: 10000;
 }
 
-.olMap {
+.olMap:not(.mapFrame) {
 	z-index: 10000 !important;
 }
 
