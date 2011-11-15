@@ -344,7 +344,7 @@
 				if ($response['carrepair'] == "yes")
 					$output .= "<tr><td><i>".$translations['captions']['carrepair']."</i></td></tr>\n";
 				if ($response['shop'] == "kiosk" || $response['kiosk'] == "yes")
-					$output .= "<i>".$translations['captions']['kiosk']."</i>\n";
+					$output .= "<tr><td><i>".$translations['captions']['kiosk']."</i></td></tr>\n";
 				$output .= "</table>\n";
 				$output .= "</div>\n";
 			}
