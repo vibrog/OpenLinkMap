@@ -216,7 +216,7 @@ function clickAd()
 	var position = map.getCenter().transform(map.getProjectionObject(), wgs84);
 
 	// open osb and jump to current position
-	var bugWindow = window.open("http://keepright.ipax.at/report_map.php?zoom="+map.getZoom()+"&lat="+position.lat+"&lon="+position.lon+"&layers=B00T&show_ign=0&show_tmpign=0").focus();
+	var bugWindow = window.open("http://keepright.ipax.at/report_map.php?zoom="+map.getZoom()+"&lat="+position.lat+"&lon="+position.lon+"&layers=B00T&show_ign=0&show_tmpign=0&ch=0%2C411%2C412%2C413").focus();
 }
 
 
@@ -325,7 +325,6 @@ function updateMap()
 	map.updateSize();
 	map.setCenter(map.getCenter(), map.getZoom());
 }
-
 
 
 // shows the search bar when clicking on the 'hide'-button
