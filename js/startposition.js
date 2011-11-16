@@ -48,7 +48,7 @@ function Startposition(map)
 				else
 					return false;
 			}
-		
+
 		requestApi("ippos", "", handler);
 	}
 
