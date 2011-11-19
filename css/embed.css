@@ -166,3 +166,9 @@ noscript p
 	width: 0;
 	height: 0;
 }
+
+/* better positioning of attribution */
+.olControlAttribution
+{
+	bottom: 3px !important;
+}

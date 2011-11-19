@@ -37,20 +37,17 @@ function createMap()
 	});
 
 	// adding some controls
+	map.addControl(new OpenLayers.Control.Attribution());
 	map.addControl(new OpenLayers.Control.PanZoomBar());
 	map.addControl(new OpenLayers.Control.ScaleLine({geodesic:true, maxWidth:200, bottomOutUnits:"", bottomInUnits:""}));
-	map.addControl(new OpenLayers.Control.MousePosition());
 	map.addControl(new OpenLayers.Control.LayerSwitcher());
 	map.addControl(new OpenLayers.Control.Navigation({dragPanOptions: {enableKinetic: true}}));
 
 	// adding map layers
 	var mapnikMap = new OpenLayers.Layer.OSM.Mapnik("Mapnik",
 	{
-		transitionEffect: 'resize'
-	});
-	var osmarenderMap = new OpenLayers.Layer.OSM.Osmarender("Osmarender",
-	{
-		transitionEffect: 'resize'
+		transitionEffect: 'resize',
+		attribution: 'Map data &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and contributors <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 	});
 
 	// adding hillshading map
@@ -62,11 +59,12 @@ function createMap()
 		numZoomLevels: 17,
 		transparent: true,
 		noOpaq: true,
-		isBaseLayer: false
+		isBaseLayer: false,
+		attribution: '<a href="http://nasa.gov/">NASA SRTM</a>'
 	});
 
 	// adding layers to map
-	map.addLayers([mapnikMap, osmarenderMap, hillMap]);
+	map.addLayers([mapnikMap, hillMap]);
 
 	// register moving of map
 	map.events.register('zoomend', map, mapZoomed);
