@@ -1002,6 +1002,7 @@ noscript p
 {
 	position: relative;
 	left: 30px;
+	margin-right: 10px;
 }
 
 #poweredby img
