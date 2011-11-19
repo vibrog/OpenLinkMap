@@ -68,8 +68,8 @@
 			<br />
 			<p id="osm">Maps and data from <a href="http://www.openstreetmap.org/">OpenStreetMap</a>, released under the terms of <a href="http://creativecommons.org/licenses/by-sa/2.0/" title="CC-BY-SA 2.0">CC-BY-SA 2.0 License</a>.</p>
 			<a href="http://nrw.net/" id="poweredby"><img src="img/ad.png" /></a>
-			<p id="info"></p>
 			<p id="ad" onclick="clickAd();">Improve the data! Correct wrong website links with the new website checker from Keepright!</p>
+			<p id="info"></p>
 			<div id="linkBar">
 				<a class="links" id="spamButton" onclick="reportSpam();">Report bug in map</a>&nbsp;•
 				<a class="links" id="infoButton" href="http://wiki.openstreetmap.org/wiki/DE:OpenLinkMap" target="_blank">More Info</a>&nbsp;•
