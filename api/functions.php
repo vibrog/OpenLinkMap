@@ -386,7 +386,7 @@
 		$url = str_replace("wikipedia/commons", "wikipedia/commons/thumb", $url);
 		$filename = explode("/", $url);
 
-		return $url."/300px-".$filename[count($filename)-1];
+		return $url."/280px-".$filename[count($filename)-1];
 	}
 
 
@@ -464,6 +464,7 @@
 
 		return false;
 	}
+
 
 	// returns latlon of given id and type
 	function getLatLon($id, $type)
