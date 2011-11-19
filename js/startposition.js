@@ -58,14 +58,14 @@ function Startposition(map)
 	// if no position set
 	if (!this.map.getCenter())
 	{
-		// position to zoom on if no permalink is given and geolocation isn't supported
-		var lat = 51.58248;
-		var lon = 15.6501;
-		var zoom = 3;
-		this.map.setCenter(getMapLatLon(lat, lon), zoom);
-
+		if (params['lat'] && params['lon'])
+		{
+			if (!params['zoom'])
+				params['zoom'] = 17;
+			this.map.setCenter(getMapLatLon(params['lat'], params['lon']), params['zoom']);
+		}
 		// if geolocation is available
-		if ((navigator.geolocation) && (typeof navigator.geolocation.getCurrentPosition != 'undefined'))
+		else if ((navigator.geolocation) && (typeof navigator.geolocation.getCurrentPosition != 'undefined'))
 		{
 			var self = this;
 			// call function to jump to geolocated position
@@ -80,23 +80,27 @@ function Startposition(map)
 				}
 			);
 		}
-		// set position by user's ip address
-		else
-			this.setPositionByIp();
+		// set position by user's ip address, otherwise set to fixed position
+		else if (!this.setPositionByIp())
+		{
+			// position to zoom on if no permalink is given and geolocation isn't supported
+			var lat = 51.58248;
+			var lon = 15.6501;
+			var zoom = 3;
+			this.map.setCenter(getMapLatLon(lat, lon), zoom);
+		}
 	}
 
 	// if position already set, create popup
-	else
+	if (params['id'] && params['type'])
 	{
-		if (params['id'] && params['type'])
-		{
-			var popupPosition = new OpenLayers.LonLat(params['lon'], params['lat']);
-			createPopup(params['id'], params['type'], params['lat'], params['lon']);
-			this.map.panTo(map.getCenter());
-			if (params['ext'])
-				showMoreInfo(params['id'], params['type'], lat, lon);
-		}
+		var popupPosition = new OpenLayers.LonLat(params['lon'], params['lat']);
+		createPopup(params['id'], params['type'], params['lat'], params['lon']);
+		this.map.panTo(map.getCenter());
+		if (params['ext'])
+			showMoreInfo(params['id'], params['type'], lat, lon);
 	}
+
 
 	// load markers without moving the map first
 	map.setCenter(map.getCenter());

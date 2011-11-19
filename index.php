@@ -39,8 +39,28 @@
 					$type = isset($_GET['objecttype']) ? $_GET['objecttype'] : null;
 				echo "type : ".(isset($type) ? ("\"".$type."\"") : ("null")).",\n";
 				echo "ext : ".((isset($_GET['ext']) && ($_GET['ext'] == 1)) ? ("true") : ("false")).",\n";
-				echo "lat : ".(isset($_GET['lat']) ? ($_GET['lat']) : ("null")).",\n";
-				echo "lon : ".(isset($_GET['lon']) ? ($_GET['lon']) : ("null")).",\n";
+				echo "lat : ";
+					if (isset($_GET['lat']))
+						echo $_GET['lat'].",\n";
+					else
+					{
+						$latlon = getLatLon($_GET['id'], $type);
+						if ($latlon)
+							echo $latlon[1].",\n";
+						else
+							echo "null,\n";
+					}
+				echo "lon : ";
+					if (isset($_GET['lon']))
+						echo $_GET['lon'].",\n";
+					else
+					{
+						$latlon = getLatLon($_GET['id'], $type);
+						if ($latlon)
+							echo $latlon[0].",\n";
+						else
+							echo "null,\n";
+					}
 				echo "zoom : ".(isset($_GET['zoom']) ? ($_GET['zoom']) : ("null")).",\n";
 				echo "bounded : ".(((isset($_GET['bounded'])) && ($_GET['bounded'] == 1)) ? 1 : 0).",\n";
 				echo "offset : ".(isset($_GET['offset']) ? ($_GET['offset']) : ("null")).",\n";

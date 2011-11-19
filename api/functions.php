@@ -477,8 +477,7 @@
 		$query = "SELECT
 					id, ST_X(geom), ST_Y(geom)
 					FROM ".$type."s
-					WHERE (id = ".$id.")
-					) AS foo;";
+					WHERE (id = ".$id.");";
 		$response = requestDetails($query, $connection);
 
 		pg_close($connection);
