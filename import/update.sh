@@ -15,7 +15,6 @@ PATH="$PATH:/home/www/sites/194.245.35.149/site/import/bin"
 # update planet file, ~ 50 min
 echo "Updating planet file"
 echo ""
-date -u +%s > timestamp
 osmupdate old.pbf new.pbf --max-merge=2 --hourly --drop-author -v
 rm old.pbf
 mv new.pbf old.pbf
@@ -73,4 +72,5 @@ echo ""
 php update.php
 rm olm.osc
 rm nextobjects.osc
+date -u +%s > timestamp
 echo ""
