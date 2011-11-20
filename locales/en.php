@@ -141,7 +141,8 @@
 			"247" => "24/7",
 			"open" => "now open",
 			"closed" => "now closed",
-			"maybeopen" => "Open in holiday"
+			"maybeopen" => "Open in holiday",
+			"alwaysopen" => "Open 24/7"
 		),
 		"tags" => array(
 			"aerialway" => array(

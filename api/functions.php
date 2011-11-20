@@ -992,4 +992,14 @@
 				return $type;
 		}
 	}
+
+
+	// returns true if the poi with given openinghours string is always open
+	function isOpen247($openinghours)
+	{
+		if (($openinghours == "24/7") || ($openinghours == "Mo-Su 00:00-24:00"))
+			return true;
+
+		return false;
+	}
 ?>

@@ -359,7 +359,9 @@
 					if ($openinghours)
 					{
 						$output .= "<tr><td><span><u>".$translations['captions']['opening'].":</u><br />".$openinghours."</span></td></tr>\n";
-						if (isPoiOpen($response['openinghours'], $offset))
+						if (isOpen247($response['openinghours']))
+							$output .= "<tr><td>&nbsp;&nbsp;<span class=\"open\">".$translations['opening']['alwaysopen']."</span></td></tr>\n";
+						else if (isPoiOpen($response['openinghours'], $offset))
 							$output .= "<tr><td>&nbsp;&nbsp;<span class=\"open\">".$translations['opening']['open']."</span></td></tr>\n";
 						else if (isInHoliday($response['openinghours'], $offset))
 							$output .= "<tr><td>&nbsp;&nbsp;<span class=\"maybeopen\">".$translations['opening']['maybeopen']."</span></td></tr>\n";

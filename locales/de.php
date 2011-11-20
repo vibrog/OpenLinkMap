@@ -141,7 +141,8 @@
 			"247" => "Mo-Fr 00:00-24:00",
 			"open" => "Momentan geöffnet",
 			"closed" => "Momentan geschlossen",
-			"maybeopen" => "In den Ferien und an Feiertagen geöffnet"
+			"maybeopen" => "In den Ferien und an Feiertagen geöffnet",
+			"alwaysopen" => "Rund um die Uhr geöffnet"
 		),
 		"tags" => array(
 			"aerialway" => array(

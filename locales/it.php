@@ -141,7 +141,8 @@
 			"247" => "24/7",
 			"open" => "aperto",
 			"closed" => "chiuso",
-			"maybeopen" => "Aperto nei festivi"
+			"maybeopen" => "Aperto nei festivi",
+			"alwaysopen" => "Aperto tutto il giorno"
 		),
 		"tags" => array(
 			"aerialway" => array(

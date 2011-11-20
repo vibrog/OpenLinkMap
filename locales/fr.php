@@ -141,7 +141,8 @@
 			"247" => "Ouvert autour de l'horloge",
 			"open" => "ouvert autour de l'horloge",
 			"closed" => "Fermée",
-			"maybeopen" => "Ouvert les jours fériés"
+			"maybeopen" => "Ouvert les jours fériés",
+			"alwaysopen" => "Ouverte autour de l'horloge"
 		),
 		"tags" => array(
 			"aerialway" => array(
