@@ -98,7 +98,7 @@ function Startposition(map)
 		createPopup(params['id'], params['type'], params['lat'], params['lon']);
 		this.map.panTo(map.getCenter());
 		if (params['ext'])
-			showMoreInfo(params['id'], params['type'], lat, lon);
+			showMoreInfo(params['id'], params['type'], params['lat'], params['lon']);
 	}
 
 
