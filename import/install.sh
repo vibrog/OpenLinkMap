@@ -6,6 +6,16 @@
 # See openlinkmap.org for details.
 
 
+# run this script not automatically! you have to change paths and modify it to your own environment!
+
+# install necessary software
+yum install gzip zlib zlib-devel postgresql-server postgresql-libs postgresql postgresql-common postgis
+
+wget -O - http://m.m.i24.cc/osmupdate.c | cc -x c - -o osmupdate
+wget -O - http://m.m.i24.cc/osmfilter.c |cc -x c - -o osmfilter
+wget -O - http://m.m.i24.cc/osmconvert.c | cc -x c - -lz -o osmconvert
+
+
 # set up database
 su postgres
 createuser olm
