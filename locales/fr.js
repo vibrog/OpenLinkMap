@@ -67,9 +67,9 @@ var descriptions =
 // translations of OpenLayers
 OpenLayers.Lang["fr"] = OpenLayers.Util.applyDefaults({
 	'unhandledRequest': "Requête non gérée, retournant ${statusText}",
-	'permalink': "Permalien",
-	'overlays': "Calques",
-	'baseLayer': "Calque de base",
+	'Permalink': "Permalien",
+	'Overlays': "Calques",
+	'Base Layer': "Calque de base",
 	'sameProjection': "La carte de situation ne fonctionne que lorsque sa projection est la même que celle de la carte principale",
 	'readNotImplemented': "Lecture non implémentée.",
 	'writeNotImplemented': "Ecriture non implémentée.",
@@ -83,7 +83,7 @@ OpenLayers.Lang["fr"] = OpenLayers.Util.applyDefaults({
 	'commitFailed': "Transaction WFS : ECHEC ${response}",
 	'googleWarning': "La couche Google n\'a pas été en mesure de se charger correctement.\x3cbr\x3e\x3cbr\x3ePour supprimer ce message, choisissez une nouvelle BaseLayer dans le sélecteur de couche en haut à droite.\x3cbr\x3e\x3cbr\x3eCela est possiblement causé par la non-inclusion de la librairie Google Maps, ou alors parce que la clé de l\'API ne correspond pas à votre site.\x3cbr\x3e\x3cbr\x3eDéveloppeurs : pour savoir comment corriger ceci, \x3ca href=\'http://trac.openlayers.org/wiki/Google\' target=\'_blank\'\x3ecliquez ici\x3c/a\x3e",
 	'getLayerWarning': "La couche ${layerType} n\'est pas en mesure de se charger correctement.\x3cbr\x3e\x3cbr\x3ePour supprimer ce message, choisissez une nouvelle BaseLayer dans le sélecteur de couche en haut à droite.\x3cbr\x3e\x3cbr\x3eCela est possiblement causé par la non-inclusion de la librairie ${layerLib}.\x3cbr\x3e\x3cbr\x3eDéveloppeurs : pour savoir comment corriger ceci, \x3ca href=\'http://trac.openlayers.org/wiki/${layerLib}\' target=\'_blank\'\x3ecliquez ici\x3c/a\x3e",
-	'scale': "Echelle ~ 1 : ${scaleDenom}",
+	'Scale = 1 : ${scaleDenom}': "Echelle ~ 1 : ${scaleDenom}",
 	'W': "O",
 	'E': "E",
 	'N': "N",
@@ -96,5 +96,6 @@ OpenLayers.Lang["fr"] = OpenLayers.Util.applyDefaults({
 	'pixelAddError': "Vous devez passer les deux valeurs x et y à la fonction add.",
 	'unsupportedGeometryType': "Type de géométrie non supporté : ${geomType}",
 	'pagePositionFailed': "OpenLayers.Util.pagePosition a échoué: l\'élément d\'id ${elemId} pourrait être mal positionné.",
-	'filterEvaluateNotImplemented': "évaluer n\'a pas encore été implémenté pour ce type de filtre."
+	'filterEvaluateNotImplemented': "évaluer n\'a pas encore été implémenté pour ce type de filtre.",
+	'proxyNeeded': "Vous avez très probablement besoin de renseigner OpenLayers.ProxyHost pour accéder à ${url}. Voir http://trac.osgeo.org/openlayers/wiki/FrequentlyAskedQuestions#ProxyHost"
 });

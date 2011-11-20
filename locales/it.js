@@ -68,9 +68,9 @@ var descriptions =
 OpenLayers.Lang.it =
 {
 	'unhandledRequest': "Richiesta non gestita, ritornato ${statusText}",
-	'permalink': "Permalink",
-	'overlays': "Livelli sovrapposti",
-	'baseLayer': "Livelli di base",
+	'Permalink': "Permalink",
+	'Overlays': "Livelli sovrapposti",
+	'Base Layer': "Livelli di base",
 	'sameProjection': "La mappa d'insieme funziona solo quando è nella stessa proiezione della mappa principale",
 	'readNotImplemented': "Lettura non implementata.",
 	'writeNotImplemented': "Scrittura non implementata.",
@@ -112,7 +112,7 @@ OpenLayers.Lang.it =
 		"Sviluppatori: per farlo funzionare correttamente " +
 		"<a href='http://trac.openlayers.org/wiki/${layerLib}' " +
 		"target='_blank'>fare clic qui</a>",
-	'scale': "Scala = 1 : ${scaleDenom}",
+	'Scale = 1 : ${scaleDenom}': "Scala = 1 : ${scaleDenom}",
 	'W': 'O',
 	'E': 'E',
 	'N': 'N',
@@ -122,7 +122,7 @@ OpenLayers.Lang.it =
 	'reprojectDeprecated':
 		"Si sta usando l'opzione 'reproject' " +
 		"sul livello ${layerName}. Questa opzione è sconsigliata: " +
-		"il suo uso è stato progettato per permettere di visualizzare dati su " + 
+		"il suo uso è stato progettato per permettere di visualizzare dati su " +
 		"mappe di base commerciali, ma tale funzionalità dovrebbe essere ottenuta ora usando " +
 		"il supporto Mercatore sferico. Ulteriori informazioni sono disponibili all'indirizzo " +
 		"http://trac.openlayers.org/wiki/SphericalMercator",
@@ -135,5 +135,5 @@ OpenLayers.Lang.it =
 	'unsupportedGeometryType': "Tipo geometrico non supportato: ${geomType}",
 	'pagePositionFailed': "OpenLayers.Util.pagePosition fallita: l'elemento con id ${elemId} potrebbe essere fuori posto.",
 	'filterEvaluateNotImplemented': "\"evaluate\" non è implementata per questo tipo di filtro.",
-	'end': '' 
+	'end': ''
 };

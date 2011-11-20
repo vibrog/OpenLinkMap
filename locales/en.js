@@ -68,9 +68,9 @@ var descriptions =
 OpenLayers.Lang.en =
 {
 	'unhandledRequest': "Unhandled request return ${statusText}",
-	'permalink': "Permalink",
-	'overlays': "Overlays",
-	'baseLayer': "Base Layer",
+	'Permalink': "Permalink",
+	'Overlays': "Overlays",
+	'Base Layer': "Base Layer",
 	'sameProjection': "The overview map only works when it is in the same projection as the main map",
 	'readNotImplemented': "Read not implemented.",
 	'writeNotImplemented': "Write not implemented.",
@@ -112,7 +112,7 @@ OpenLayers.Lang.en =
 		"Developers: For help getting this working correctly, " +
 		"<a href='http://trac.openlayers.org/wiki/${layerLib}' " +
 		"target='_blank'>click here</a>",
-	'scale': "Scale = 1 : ${scaleDenom}",
+		'Scale = 1 : ${scaleDenom}': "Scale = 1 : ${scaleDenom}",
 	'W': 'W',
 	'E': 'E',
 	'N': 'N',
@@ -122,7 +122,7 @@ OpenLayers.Lang.en =
 	'reprojectDeprecated':
 		"You are using the 'reproject' option " +
 		"on the ${layerName} layer. This option is deprecated: " +
-		"its use was designed to support displaying data over commercial " + 
+		"its use was designed to support displaying data over commercial " +
 		"basemaps, but that functionality should now be achieved by using " +
 		"Spherical Mercator support. More information is available from " +
 		"http://trac.openlayers.org/wiki/SphericalMercator.",
@@ -135,5 +135,7 @@ OpenLayers.Lang.en =
 	'unsupportedGeometryType': "Unsupported geometry type: ${geomType}",
 	'pagePositionFailed': "OpenLayers.Util.pagePosition failed: element with id ${elemId} may be misplaced.",
 	'filterEvaluateNotImplemented': "evaluate is not implemented for this filter type.",
-	'end': '' 
+	'end': '',
+	'proxyNeeded': "You probably need to set OpenLayers.ProxyHost to access ${url}."+
+	"See http://trac.osgeo.org/openlayers/wiki/FrequentlyAskedQuestions#ProxyHost",
 };
