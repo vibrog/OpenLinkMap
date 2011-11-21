@@ -70,7 +70,6 @@
 		<script type="text/javascript" src="api/langfile.php?lang=<? echo $lang; ?>"></script>
 		<script type="text/javascript" src="js/OpenStreetMap.js"></script>
 		<script type="text/javascript" src="js/embed.js"></script>
-		<script type="text/javascript" src="js/startposition.js"></script>
 	</head>
 	<body onload="createMap();">
 		<div id="mapFrame" class="mapFrame">

@@ -313,7 +313,8 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 		// if more than one result, show them in the current map viewbox
 		else
 		{
-			var bounds = new OpenLayers.Bounds(this.extent[3], this.extent[2], this.extent[1], this.extent[0]).transform(new OpenLayers.Projection("EPSG:4326"), this.map.getProjectionObject());
+			var bounds = new OpenLayers.Bounds(this.extent[1], this.extent[0], this.extent[3], this.extent[2]).transform(wgs84, this.map.getProjectionObject());
+			alert(bounds.toBBOX());
 			this.map.zoomToExtent(bounds, true);
 			this.map.zoomOut();
 			this.map.zoomOut();

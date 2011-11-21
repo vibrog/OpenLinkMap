@@ -509,7 +509,7 @@ function createPopup(id, type, lat, lon)
 			if (content != "NULL")
 			{
 				// set popup content
-				popup.setContentHTML(editPopupContent(request.responseText, popup.lonlat.lat, popup.lonlat.lon, type, id));
+				popup.setContentHTML(editPopupContent(content, popup.lonlat.lat, popup.lonlat.lon, type, id));
 				map.removePopup(popup);
 				map.addPopup(popup);
 			}
