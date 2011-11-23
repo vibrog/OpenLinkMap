@@ -548,12 +548,12 @@ function editPopupContent(content, lat, lon, type, id)
 
 
 // jumps to a given position and marks this point
-function showPoint(lat, lon, poilat, poilon)
+function showPoint(lon, lat, poilat, poilon)
 {
 	// first remove all features that only a point is visible
 	markerLayer.removeAllFeatures();
 	// get position
-	var panPosition = getMapLatLon(lat, lon);
+	var panPosition = getMapLatLon(lon, lat);
 
 	// create point
 	var point = new OpenLayers.Geometry.Point(panPosition.lon, panPosition.lat);
@@ -561,8 +561,18 @@ function showPoint(lat, lon, poilat, poilon)
 	var pointFeature = new OpenLayers.Feature.Vector(point, null, style);
 	markerLayer.addFeatures([pointFeature]);
 
+	// switch coordinates
+	if (lat < poilat)
+	{
+		tmp = lon;
+		lon = poilon;
+		poilon = tmp;
+		tmp = lat;
+		lat = poilat;
+		poilat = tmp;
+	}
 	// show map with these positions
-	var bounds = new OpenLayers.Bounds(poilat, poilon, lon, lat).transform(wgs84, map.getProjectionObject());
+	var bounds = new OpenLayers.Bounds(poilat, poilon, lat, lon).transform(wgs84, map.getProjectionObject());
 	map.zoomToExtent(bounds, true);
 	map.zoomOut();
 }
