@@ -36,7 +36,8 @@ var translations =
 	"routing" : "Route",
 	"searchoption" : "Search only in the current map view",
 	"close" : "Click to close",
-	"ad" : "Improve the data! Correct wrong website links with the new website checker from Keepright!"
+	"ad" : "Improve the data! Correct wrong website links with the new website checker from Keepright!",
+	"inolm" : "Show in OpenLinkMap..."
 };
 
 // descriptions for search results

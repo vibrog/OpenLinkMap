@@ -36,7 +36,8 @@ var translations =
 	"routing" : "Route",
 	"searchoption" : "Cercare solo nella mappa visualizzata",
 	"close" : "Fare clic per chiudere",
-	"ad" : "Migliorare i dati! Correggere i collegamenti obsoleti e rotto con il nuovo sito web check da Keep Right!"
+	"ad" : "Migliorare i dati! Correggere i collegamenti obsoleti e rotto con il nuovo sito web check da Keep Right!",
+	"inolm" : "Visualizza in OpenLinkMap..."
 };
 
 // descriptions for search results

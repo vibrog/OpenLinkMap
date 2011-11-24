@@ -49,16 +49,64 @@ function createMap()
 		attribution: 'Map data &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and contributors <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 	});
 
+	// styles for marker layer
+	var markerStyle = new OpenLayers.Style(
+	{
+		'externalGraphic': OpenLayers.Util.getImagesLocation() + "marker.png",
+		'graphicWidth': 21,
+		'graphicHeight': 25,
+		'graphicXOffset': -10.5,
+		'graphicYOffset': -25
+	});
+	var markerStyleSelected = new OpenLayers.Style(
+	{
+		pointRadius: 15,
+		strokeColor: "#f99c30",
+		strokeWidth: 2,
+		fillColor: "#f99c30",
+		fillOpacity: 1
+	});
+	var markerStyleMap = new OpenLayers.StyleMap(
+	{
+		'default': markerStyle,
+		'select': markerStyleSelected
+	});
+
+	// adding marker overlay
+	markerLayer = new OpenLayers.Layer.Vector("Marker",
+	{
+		projection: wgs84,
+		visibility: true,
+		transitionEffect: 'resize',
+		styleMap: markerStyleMap
+	});
+
+	// adding control features (clicking on markers) to overlays
+	eventHandlerClick = new OpenLayers.Control.SelectFeature(markerLayer,
+	{
+		multiple: true,
+		toggle: true,
+		onSelect: showPopup,
+		onUnselect: hidePopup
+	});
+	map.addControl(eventHandlerClick);
+	eventHandlerClick.activate();
+
 	// adding layers to map
-	map.addLayers([mapnikMap]);
+	map.addLayers([mapnikMap, markerLayer]);
 
 
 	// create popup
 	if (params['id'] && params['type'])
 	{
-		map.setCenter(getMapLatLon(params['lat'], params['lon']), 13);
-		var popupPosition = new OpenLayers.LonLat(params['lon'], params['lat']);
-		var popup = createPopup(params['id'], params['type'], params['lat'], params['lon']);
+		var position = getMapLatLon(params['lat'], params['lon']);
+		map.setCenter(position, 14);
+
+		// create point
+		var point = new OpenLayers.Geometry.Point(position.lon, position.lat);
+		var style = this.defaultStyle ? OpenLayers.Util.applyDefaults({}, this.defaultStyle) : null;
+		var pointFeature = new OpenLayers.Feature.Vector(point, {"id":params['id'], "type":params['type']}, style);
+		markerLayer.addFeatures([pointFeature]);
 	}
 }
 
@@ -99,40 +147,6 @@ function hidePopup(feature, popup)
 }
 
 
-// creates a popup at a given position
-function createPopup(id, type, lat, lon)
-{
-	// create popup
-	var popup = new OpenLayers.Popup.FramedCloud("popup", getMapLatLon(lat, lon), null, loading, {size: new OpenLayers.Size(6,6),offset: new OpenLayers.Pixel(-3,-3)}, true, function(){map.removePopup(popup);});
-	map.addPopup(popup);
-
-	// request details for popup
-	var handler = function(request)
-		{
-			var content = request.responseText;
-
-			if (content != "NULL")
-			{
-				// set popup content
-				popup.setContentHTML(content);
-				map.removePopup(popup);
-				map.addPopup(popup);
-				alert(map.getPixelFromLonLat(map.getCenter()).y+(popup.size.w));
-				map.setCenter(
-					map.getLonLatFromPixel(
-						map.getPixelFromLonLat(map.getCenter()).x-(popup.size.w),
-						map.getPixelFromLonLat(map.getCenter()).y-(popup.size.h)
-					),
-				  13
-				);
-			}
-			else
-				map.removePopup(popup);
-		}
-	requestApi("details", "id="+id+"&type="+type+"&format=text&offset="+offset+"&lang="+params['lang'], handler);
-}
-
-
 // perform a synchron API request
 function requestApi(file, query, handler)
 {
@@ -154,4 +168,36 @@ function queryLatLon(lat, lon)
 function queryLatLonZoom(lat, lon, zoom)
 {
 	return queryLatLon(lat, lon)+"&zoom="+zoom;
+}
+
+// add a popup to map and set content
+function showPopup(feature)
+{
+	// create popup
+	feature.popup = new OpenLayers.Popup.FramedCloud("popup", new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y), null, loading, {size: new OpenLayers.Size(6,6),offset: new OpenLayers.Pixel(-3,-3)}, true, function(){eventHandlerClick.unselectAll(feature);});
+	map.addPopup(feature.popup);
+
+	// load popup contents
+	var handler = function(request)
+	{
+		var content = request.responseText;
+
+		if (content != "NULL")
+		{
+			feature.popup.position = new OpenLayers.LonLat(feature.geometry.x, feature.geometry.y);
+			feature.popup.setContentHTML(content+'<br/><a id="popupLinks" target="_blank" href="'+root+'index.php?id='+feature.attributes['id']+'&type='+feature.attributes['type']+'">'+translations['inolm']+'</a>');
+			map.removePopup(feature.popup);
+			map.addPopup(feature.popup);
+		}
+		else
+			map.removePopup(feature.popup);
+	}
+	requestApi("details", "id="+feature.attributes['id']+"&type="+feature.attributes['type']+"&format=text&offset="+offset+"&lang="+params['lang'], handler);
+}
+
+
+// removes given popup from map
+function hidePopup(feature, popup)
+{
+	map.removePopup(feature.popup);
 }

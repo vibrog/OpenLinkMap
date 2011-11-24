@@ -36,7 +36,8 @@ var translations =
 	"routing" : "Route",
 	"searchoption" : "Nur im aktuellen Kartenausschnitt suchen",
 	"close" : "Klicken zum Schließen",
-	"ad" : "Verbessere die Daten! Korrigiere veraltete und fehlerhafte Links mit dem neuen Website Checker von Keepright!"
+	"ad" : "Verbessere die Daten! Korrigiere veraltete und fehlerhafte Links mit dem neuen Website Checker von Keepright!",
+	"inolm" : "In OpenLinkMap zeigen..."
 };
 
 // descriptions for search results
