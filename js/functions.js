@@ -540,7 +540,7 @@ function editPopupContent(content, lat, lon, type, id)
 	// add some links to the bottom of a popup
 	content += "</div><br /><small id='popupLinks'><b><a id='moreInfoLink' href=\"javascript:showMoreInfo("+id+",'"+type+"', "+lat+", "+lon+")\">"+translations['more']+" >></a></b>"+
 		"&nbsp;&nbsp;<a id='permalink' href='"+root+"?"+queryLatLonZoom(lat, lon, map.getZoom())+"&id="+id+"&type="+type+"&ext="+ext+"'>"+translations['permalink']+"</a>"+
-		"&nbsp;&nbsp;<a href='http://www.openstreetmap.org/edit?"+queryLatLonZoom(lat, lon, map.getZoom())+"&"+type+"="+id+"' target='_blank'>Potlatch</a>"+
+		"&nbsp;&nbsp;<a href='http://www.openstreetmap.org/edit?"+queryLatLonZoom(lat, lon, map.getZoom())+"&"+type+"="+id+"&editor=potlatch2' target='_blank'>Potlatch</a>"+
 		"&nbsp;&nbsp;<a href='http://localhost:8111/load_and_zoom?left="+l+"&right="+r+"&top="+t+"&bottom="+b+"&select="+type+id+"' target='josm' onclick='return josm(this.href)'>JOSM</a>"+
 		"&nbsp;&nbsp;<a href='http://www.openstreetmap.org/browse/"+type+"/"+id+"' target='_blank'>"+translations['details']+"</a></small>";
 	return content;
