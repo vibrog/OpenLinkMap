@@ -52,11 +52,12 @@ function createMap()
 	// styles for marker layer
 	var markerStyle = new OpenLayers.Style(
 	{
-		'externalGraphic': OpenLayers.Util.getImagesLocation() + "marker.png",
-		'graphicWidth': 21,
-		'graphicHeight': 25,
-		'graphicXOffset': -10.5,
-		'graphicYOffset': -25
+		externalGraphic: OpenLayers.Util.getImagesLocation() + "marker.png",
+		graphicWidth: 21,
+		graphicHeight: 25,
+		graphicXOffset: -10.5,
+		graphicYOffset: -25,
+		cursor: "pointer"
 	});
 	var markerStyleSelected = new OpenLayers.Style(
 	{
