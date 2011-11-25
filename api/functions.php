@@ -685,9 +685,15 @@
 						foo.distance,
 						foo.osmid
 					FROM (
-						SELECT tags->'name' AS name, geom AS next, id AS osmid,  ST_Distance_Sphere(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), geom) AS distance
+						(SELECT tags->'name' AS name, geom AS next, id AS osmid,  ST_Distance_Sphere(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), geom) AS distance
 						FROM nodes
 						WHERE (".$tagquery.") AND geom && ST_Buffer(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), 2000)
+						ORDER BY distance LIMIT 2)
+						UNION
+						(SELECT tags->'name' AS name, geom AS next, id AS osmid,  ST_Distance_Sphere(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), geom) AS distance
+						FROM ways
+						WHERE (".$tagquery.") AND geom && ST_Buffer(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), 2000)
+						ORDER BY distance LIMIT 2)
 					) AS foo ORDER BY foo.distance LIMIT 2;";
 
 		$result = pg_query($connection, $query);
