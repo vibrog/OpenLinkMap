@@ -46,7 +46,7 @@ function createMap()
 	var mapnikMap = new OpenLayers.Layer.OSM.Mapnik("Mapnik",
 	{
 		transitionEffect: 'resize',
-		attribution: 'Map data &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> and contributors <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+		attribution: 'Map data &copy; <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a>'
 	});
 
 	// styles for marker layer
