@@ -37,7 +37,9 @@ var translations =
 	"searchoption" : "Search only in the current map view",
 	"close" : "Click to close",
 	"ad" : "Improve the data! Correct wrong website links with the new website checker from Keepright!",
-	"inolm" : "Show in OpenLinkMap..."
+	"inolm" : "Show in OpenLinkMap...",
+	"embed" : "HTML-Code",
+	"embeddescription" : "Copia questo codice HTML sul tuo sito web per mostrare una piccola mappa con un pennarello."
 };
 
 // descriptions for search results

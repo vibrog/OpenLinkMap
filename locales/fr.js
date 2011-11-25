@@ -37,7 +37,9 @@ var translations =
 	"searchoption" : "Chercher seulement dans la vue en cours",
 	"close" : "Cliquez pour fermer",
 	"ad" : "Améliorer les données! Corriger les liens périmés et rompu avec le chèque nouveau site de Keep Right!",
-	"inolm" : "Afficher dans le OpenLinkMap..."
+	"inolm" : "Afficher dans le OpenLinkMap...",
+	"embed" : "HTML-Code",
+	"embeddescription" : "Copiez ce code HTML pour votre site web pour montrer une petite carte avec un marqueur."
 };
 
 // descriptions for search results

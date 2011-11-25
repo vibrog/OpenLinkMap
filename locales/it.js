@@ -37,7 +37,9 @@ var translations =
 	"searchoption" : "Cercare solo nella mappa visualizzata",
 	"close" : "Fare clic per chiudere",
 	"ad" : "Migliorare i dati! Correggere i collegamenti obsoleti e rotto con il nuovo sito web check da Keep Right!",
-	"inolm" : "Visualizza in OpenLinkMap..."
+	"inolm" : "Visualizza in OpenLinkMap...",
+	"embed" : "HTML-Code",
+	"embeddescription" : "Copia questo codice HTML sul tuo sito web per mostrare una piccola mappa con un pennarello."
 };
 
 // descriptions for search results

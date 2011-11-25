@@ -538,12 +538,29 @@ function editPopupContent(content, lat, lon, type, id)
 	var ext = gEBI('detailsBar').className == 'infoBar' ? 1 : 0;
 
 	// add some links to the bottom of a popup
-	content += "</div><br /><small id='popupLinks'><b><a id='moreInfoLink' href=\"javascript:showMoreInfo("+id+",'"+type+"', "+lat+", "+lon+")\">"+translations['more']+" >></a></b>"+
-		"&nbsp;&nbsp;<a id='permalink' href='"+root+"?"+queryLatLonZoom(lat, lon, map.getZoom())+"&id="+id+"&type="+type+"&ext="+ext+"'>"+translations['permalink']+"</a>"+
-		"&nbsp;&nbsp;<a href='http://www.openstreetmap.org/edit?"+queryLatLonZoom(lat, lon, map.getZoom())+"&"+type+"="+id+"&editor=potlatch2' target='_blank'>Potlatch</a>"+
-		"&nbsp;&nbsp;<a href='http://localhost:8111/load_and_zoom?left="+l+"&right="+r+"&top="+t+"&bottom="+b+"&select="+type+id+"' target='josm' onclick='return josm(this.href)'>JOSM</a>"+
-		"&nbsp;&nbsp;<a href='http://www.openstreetmap.org/browse/"+type+"/"+id+"' target='_blank'>"+translations['details']+"</a></small>";
+	content +=
+		'</div><br /><small id="popupLinks">'+
+		'<b><a id="moreInfoLink" href="javascript:showMoreInfo('+id+',\''+type+'\', '+lat+', '+lon+')">'+translations['more']+' >></a></b>'+
+		'&nbsp;&nbsp;<a id="permalink" href="'+root+'?'+queryLatLonZoom(lat, lon, map.getZoom())+'&id='+id+'&type='+type+'&ext='+ext+'">'+translations['permalink']+'</a>'+
+		'&nbsp;&nbsp;<a href="http://www.openstreetmap.org/edit?'+queryLatLonZoom(lat, lon, map.getZoom())+'&'+type+'='+id+'&editor=potlatch2" target="_blank">Potlatch</a>'+
+		'&nbsp;&nbsp;<a href="http://localhost:8111/load_and_zoom?left='+l+'&right='+r+'&top='+t+'&bottom='+b+'&select='+type+id+'" target="josm" onclick="return josm(this.href)">JOSM</a>'+
+		'&nbsp;&nbsp;<a href="http://www.openstreetmap.org/browse/'+type+'/'+id+'" target="_blank">'+translations['details']+'</a>'+
+		'&nbsp;&nbsp;<a href="javascript:getEmbedLink('+id+',\''+type+'\')">'+translations['embed']+'</a></small>';
 	return content;
+}
+
+
+// display html code to embed with iframe
+function getEmbedLink(id, type)
+{
+	showSideBar();
+	var detailsbar = gEBI('detailsBar');
+	detailsbar.className = "infoBar";
+	detailsbar.innerHTML = '<div class="moreInfoBox"><center><dfn><b>'+translations['embed']+'</b></dfn><br /><dfn>'+translations['embeddescription']+'</dfn></center></div><div class="moreInfoBox"><input id="embed" type=text value=\'<iframe width="420" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'+root+'embed.php?id='+id+'&type='+type+'" style="border: 1px solid black"></iframe>\'</div>';
+
+	var embed = gEBI('embed');
+	embed.focus();
+	embed.select();
 }
 
 
