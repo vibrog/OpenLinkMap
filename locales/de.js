@@ -12,7 +12,7 @@ var translations =
 	"details" : "Details",
 	"search" : "Suchen",
 	"spam" : "Kartenfehler melden",
-	"title" : "Datensatz und Karten stammen von <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> und stehen unter der <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\" title=\"CC-BY-SA 2.0\">CC-BY-SA 2.0 Lizenz</a>.<br />Höhenprofil: <a href=\"http://nasa.gov/\">NASA SRTM</a>.",
+	"title" : "Datensatz und Karten stammen von <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> und stehen unter der <a href=\"http://creativecommons.org/licenses/by-sa/2.0/deed.de\" title=\"CC-BY-SA 2.0\">CC-BY-SA 2.0 Lizenz</a>.<br />Höhenprofil: <a href=\"http://nasa.gov/\">NASA SRTM</a>.",
 	"info" : "Mehr Infos",
 	"contact" : "Kontakt",
 	"loading" : "Laden...",
@@ -39,7 +39,8 @@ var translations =
 	"ad" : "Verbessere die Daten! Korrigiere veraltete und fehlerhafte Links mit dem neuen Website Checker von Keepright!",
 	"inolm" : "In OpenLinkMap zeigen...",
 	"embed" : "HTML-Code",
-	"embeddescription" : "Kopieren Sie diesen HTML-Code und binden sie ihn ein in eine eigene Webseite ein, um eine kleine Karte mit einer Markierung anzuzeigen."
+	"embeddescription" : "Kopieren Sie diesen HTML-Code und binden sie ihn ein in eine eigene Webseite ein, um eine kleine Karte mit einer Markierung anzuzeigen.",
+	"embedattribution" : 'Karte und Daten &copy; <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> und Mitwirkende <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.de" target="_blank">CC-BY-SA</a>'
 };
 
 // descriptions for search results

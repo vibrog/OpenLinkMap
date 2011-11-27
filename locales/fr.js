@@ -12,7 +12,7 @@ var translations =
 	"details" : "Détails",
 	"search" : "Recherche",
 	"spam" : "Signaler une erreur sur le carte",
-	"title" : "Données sont tirées de <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a>, disponibles sous la licence <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\" title=\"CC-BY-SA 2.0\">license CC-BY-SA 2.0</a>.<br />Terrain: <a href=\"http://nasa.gov/\">NASA SRTM</a>",
+	"title" : "Données sont tirées de <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a>, disponibles sous la licence <a href=\"http://creativecommons.org/licenses/by-sa/2.0/deed.fr\" title=\"CC-BY-SA 2.0\">license CC-BY-SA 2.0</a>.<br />Terrain: <a href=\"http://nasa.gov/\">NASA SRTM</a>",
 	"info" : "Plus d'informations",
 	"contact" : "Contact",
 	"loading" : "Chargement...",
@@ -39,7 +39,8 @@ var translations =
 	"ad" : "Améliorer les données! Corriger les liens périmés et rompu avec le chèque nouveau site de Keep Right!",
 	"inolm" : "Afficher dans le OpenLinkMap...",
 	"embed" : "HTML-Code",
-	"embeddescription" : "Copiez ce code HTML pour votre site web pour montrer une petite carte avec un marqueur."
+	"embeddescription" : "Copiez ce code HTML pour votre site web pour montrer une petite carte avec un marqueur.",
+	"embedattribution" : 'Données sont tirées &copy; <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> et contributif <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.fr" target="_blank">CC-BY-SA</a>'
 };
 
 // descriptions for search results

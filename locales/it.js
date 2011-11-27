@@ -12,7 +12,7 @@ var translations =
 	"details" : "Dettagli",
 	"search" : "Avanti",
 	"spam" : "Segnala errori",
-	"title" : "Mapppa e dati da <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> e sotto <a href=\"http://creativecommons.org/licenses/by-sa/2.0/deed.it\" title=\"CC-BY-SA 2.0\">Licenza CC-BY-SA 2.0</a>.<br />Ombreggiatura rilievi: <a href=\"http://nasa.gov/\">NASA SRTM</a>.",
+	"title" : "Mappa e dati da <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> e sotto <a href=\"http://creativecommons.org/licenses/by-sa/2.0/deed.it\" title=\"CC-BY-SA 2.0\">Licenza CC-BY-SA 2.0</a>.<br />Ombreggiatura rilievi: <a href=\"http://nasa.gov/\">NASA SRTM</a>.",
 	"info" : "Informazioni",
 	"contact" : "Contatti",
 	"loading" : "Caricamento...",
@@ -39,7 +39,8 @@ var translations =
 	"ad" : "Migliorare i dati! Correggere i collegamenti obsoleti e rotto con il nuovo sito web check da Keep Right!",
 	"inolm" : "Visualizza in OpenLinkMap...",
 	"embed" : "HTML-Code",
-	"embeddescription" : "Copia questo codice HTML sul tuo sito web per mostrare una piccola mappa con un pennarello."
+	"embeddescription" : "Copia questo codice HTML sul tuo sito web per mostrare una piccola mappa con un pennarello.",
+	"embedattribution" : 'Mappa e dati &copy; <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> e contributivo <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.it" target="_blank">CC-BY-SA</a>'
 };
 
 // descriptions for search results
