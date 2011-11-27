@@ -371,9 +371,15 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 
 	// set up key event
 	this.box.onkeydown =
-		function()
+		function(event)
 		{
-			if(window.event && window.event.keyCode == 13)
+			if (!event)
+				event = window.event;
+			if (event.which)
+				var keyCode = event.which;
+			else if (event.keyCode)
+				var keyCode = event.keyCode;
+			if(event && keyCode == 13)
 				self.send();
 		};
 
