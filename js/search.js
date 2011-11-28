@@ -202,7 +202,7 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 	}
 
 	// called when clicking on a search results, jumps to point and creates popup
-	this.showResult = function(left, bottom, top, right, lat, lon, id, type)
+	this.showResult = function(left, bottom, right, top, lat, lon, id, type)
 	{
 		// show the popup at the position
 		createPopup(id, type, lat, lon);
@@ -212,7 +212,17 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 		// zoom and pan onto object after a while
 		var zooming = function()
 			{
-				var bounds = new OpenLayers.Bounds(top, right, left, bottom).transform(wgs84, map.getProjectionObject());
+				// switch coordinates
+				if (bottom < top)
+				{
+					tmp = left;
+					left = right;
+					right = tmp;
+					tmp = bottom;
+					bottom = top;
+					top = tmp;
+				}
+				var bounds = new OpenLayers.Bounds(right, top, left, bottom).transform(wgs84, map.getProjectionObject());
 				map.zoomToExtent(bounds, false);
 				this.map.panTo(getMapLatLon(lat, lon));
 			}
