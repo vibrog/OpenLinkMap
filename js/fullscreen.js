@@ -29,7 +29,7 @@ function Fullscreen(frame, image)
 		var self = this;
 		this.frame.className = "fullscreenOut";
 		this.frame.innerHTML = "";
-		gEBI("fullscreenImg").onclick = function()
+		gEBI(this.image).onclick = function()
 		{
 			self.show(this.url);
 		};
@@ -38,13 +38,16 @@ function Fullscreen(frame, image)
 	// inits the events
 	this.init = function()
 	{
-		this.url = getWikipediaImageUrl(gEBI(this.image).src);
-
-		var self = this;
-		gEBI(this.image).onclick = function()
+		if (this.image)
 		{
-			self.show(self.url);
-		};
+			this.url = getWikipediaImageUrl(gEBI(this.image).src);
+
+			var self = this;
+			gEBI(this.image).onclick = function()
+			{
+				self.show(self.url);
+			};
+		}
 	}
 
 

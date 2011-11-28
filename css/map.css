@@ -783,7 +783,7 @@ noscript p
 	width: 0px;
 }
 
-#fullscreenImg
+#fullscreenImg, #panoramaImg
 {
 	max-width: 100%;
 	max-height: 100%;
@@ -806,7 +806,30 @@ noscript p
 	background-position: center;
 }
 
-#fullscreenImg:hover
+#panoramaImg
+{
+	max-width: 100%;
+	max-height: 100%;
+	min-width: auto;
+	min-height: auto;
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	-o-box-shadow: 0px 0px 7px #aaaaaa;
+	-webkit-box-shadow: 0px 0px 7px #aaaaaa;
+	-moz-box-shadow: 0px 0px 7px #aaaaaa;
+	box-shadow: 0px 0px 7px #aaaaaa;
+	border: 1px solid black;
+	z-index: 1000;
+	margin: auto;
+	background-image:url(../img/loading.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#fullscreenImg:hover, #panoramaImg:hover
 {
 	cursor: pointer;
 }

@@ -17,10 +17,10 @@ function Panorama(frame, image)
 		this.panorama = new OpenLayers.Map(this.frameName);
 		this.layer = new OpenLayers.Layer.Image(
 			'Panorama',
-			this.url,
-			new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
-			new OpenLayers.Size(580, 288),
-			{numZoomLevels: 3}
+			this.getSmallerPanorama(this.url),
+			new OpenLayers.Bounds(-2500, -250, 2500, 250),
+			new OpenLayers.Size(5000, 500),
+			{numZoomLevels: 4}
 		);
 		this.panorama.addLayer(this.layer);
 		this.panorama.zoomToMaxExtent();
@@ -44,7 +44,7 @@ function Panorama(frame, image)
 		var self = this;
 		this.frame.className = "fullscreenOut";
 		this.frame.innerHTML = "";
-		gEBI("fullscreenImg").onclick = function()
+		gEBI(this.image).onclick = function()
 		{
 			self.show(this.url);
 		};
@@ -53,13 +53,23 @@ function Panorama(frame, image)
 	// inits the events
 	this.init = function()
 	{
-		this.url = getWikipediaImageUrl(gEBI(this.image).src);
-
-		var self = this;
-		gEBI(this.image).onclick = function()
+		if (this.image)
 		{
-			self.show(this.url);
-		};
+			this.url = getWikipediaImageUrl(gEBI(this.image).src);
+
+			var self = this;
+			gEBI(this.image).onclick = function()
+			{
+				self.show(this.url);
+			};
+		}
+	}
+
+	// returns the url to a smaller panorama image
+	this.getSmallerPanorama = function(url)
+	{
+		var tmp = url+"/5000px-"+url.substr(url.lastIndexOf("/")+1);
+		return tmp.replace("wikipedia/commons", "wikipedia/commons/thumb");
 	}
 
 
