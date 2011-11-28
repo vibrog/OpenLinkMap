@@ -68,7 +68,7 @@ function Panorama(frame, image)
 	// returns the url to a smaller panorama image
 	this.getSmallerPanorama = function(url)
 	{
-		var tmp = url+"/5000px-"+url.substr(url.lastIndexOf("/")+1);
+		var tmp = url+"/2000px-"+url.substr(url.lastIndexOf("/")+1);
 		return tmp.replace("wikipedia/commons", "wikipedia/commons/thumb");
 	}
 
