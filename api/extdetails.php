@@ -264,7 +264,7 @@
 					if ($response['smoking'])
 					{
 						if ($response['smoking'] == "yes")
-							$output .= "<tr><td><span><u>".$translations['captions']['smoking'].":</u> </td><td>#smokingyes#</td></tr>\n";
+							$output .= "<tr><td><span><u>".$translations['captions']['smoking'].":</u> </td><td>".$translations['captions']['smokingyes']."</td></tr>\n";
 						else if ($response['smoking'] == "no")
 							$output .= "<tr><td><span><u>".$translations['captions']['smoking'].":</u> </td><td>".$translations['captions']['nosmoking']."</td></tr>\n";
 						else if ($response['smoking'] == "dedicated")
