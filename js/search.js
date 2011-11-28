@@ -319,6 +319,16 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 		// if more than one result, show them in the current map viewbox
 		else
 		{
+			// switch coordinates
+			if (this.extent[2] < this.extent[0])
+			{
+				tmp = this.extent[3];
+				this.extent[3] = this.extent[1];
+				this.extent[1] = tmp;
+				tmp = this.extent[2];
+				this.extent[2] = this.extent[0];
+				this.extent[0] = tmp;
+			}
 			var bounds = new OpenLayers.Bounds(this.extent[1], this.extent[0], this.extent[3], this.extent[2]).transform(wgs84, this.map.getProjectionObject());
 			this.map.zoomToExtent(bounds, true);
 			this.map.zoomOut();
