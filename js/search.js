@@ -320,7 +320,6 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 		else
 		{
 			var bounds = new OpenLayers.Bounds(this.extent[1], this.extent[0], this.extent[3], this.extent[2]).transform(wgs84, this.map.getProjectionObject());
-			alert(bounds.toBBOX());
 			this.map.zoomToExtent(bounds, true);
 			this.map.zoomOut();
 			this.map.zoomOut();
