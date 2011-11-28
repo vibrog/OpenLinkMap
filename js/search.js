@@ -179,10 +179,6 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 			{
 				this.bar.innerHTML = "<div id=\"errorResults\"><center><b>"+translations['nothing']+"</b></center></div>";
 				setTimeout("gEBI('"+bar+"').innerHTML = ''; gEBI('"+bar+"').className = 'infoBarOut';", 3500);
-
-				// request again, now not bounded
-				this.setBounded(0);
-    			this.send();
 			}
 			this.bar.className = "infoBar";
 		}
