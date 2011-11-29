@@ -678,7 +678,13 @@
 			$tagquery .= "tags-> '".$tags[$i][0]."' = '".$tags[$i][1]."' OR ";
 		$tagquery .= "tags-> '".$tags[$i][0]."' = '".$tags[$i][1]."'";
 
-		$query = "SELECT
+		// first select next objects ordered by distance, then throw out multiple names, then reorder by distance and limit on 2 objects
+		$query = "
+			SELECT *
+			FROM (
+				SELECT DISTINCT ON (uniques.name) *
+				FROM (
+					SELECT
 						ST_X(foo.next),
 						ST_Y(foo.next),
 						foo.name,
@@ -688,13 +694,22 @@
 						(SELECT tags->'name' AS name, geom AS next, id AS osmid,  ST_Distance_Sphere(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), geom) AS distance
 						FROM nodes
 						WHERE (".$tagquery.") AND (NOT (tags ? 'access') OR NOT (tags->'access' = 'private')) AND geom && ST_Buffer(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), 2000)
-						ORDER BY distance LIMIT 2)
+						ORDER BY distance
+						LIMIT 10)
 						UNION
 						(SELECT tags->'name' AS name, geom AS next, id AS osmid,  ST_Distance_Sphere(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), geom) AS distance
 						FROM ways
 						WHERE (".$tagquery.") AND (NOT (tags ? 'access') OR NOT (tags->'access' = 'private')) AND geom && ST_Buffer(GeometryFromText('POINT ( ".$lat." ".$lon." )', 4326 ), 2000)
-						ORDER BY distance LIMIT 2)
-					) AS foo ORDER BY foo.distance LIMIT 2;";
+						ORDER BY distance
+						LIMIT 10)
+					) AS foo
+					ORDER BY foo.distance
+					LIMIT 10
+				) AS uniques
+				ORDER BY uniques.name, uniques.distance
+			) AS ordered
+			ORDER BY ordered.distance
+			LIMIT 2;";
 
 		$result = pg_query($connection, $query);
 		$response = pg_fetch_all($result);
