@@ -65,6 +65,4 @@ echo ""
 echo "Importing in database"
 echo ""
 php import.php
-rm old-olm.osm
-rm old-nextobjects.osm
 echo ""
