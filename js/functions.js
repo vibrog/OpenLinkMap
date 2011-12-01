@@ -181,7 +181,7 @@ function createMap()
 	search = new Search(map, "searchBox", "searchBar", "searchButton", "clearButton", "searchOption");
 
 	// setting start position
-	var startposition = new Startposition(map);
+	var startposition = new Startposition(map, "locateButton");
 
 	// adding fullscreen feature
 	fullscreen = new Fullscreen("fullscreen", "moreImage");

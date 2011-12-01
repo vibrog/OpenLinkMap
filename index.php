@@ -111,6 +111,7 @@
 			<iframe id="josmFrame" src="about:blank"></iframe>
 		</div>
 		<div class="hideSidebarButton" id="hideSidebarButton" onclick="hideSideBar();" title="Hide"><b id="hideText">«</b></div>
+		<img id="locateButton" src="img/locate.png" />
 		<div id="mapFrame" class="mapFrame">
 			<noscript>
 				<p><b><?=$translations['captions']['nojavascriptheader']?></b><br /><?=$translations['captions']['nojavascripttext']?></p>

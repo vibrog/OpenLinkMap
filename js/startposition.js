@@ -7,7 +7,7 @@ See olm.openstreetmap.de/info for details.
 
 
 // set start position by given coordinate or, if possible, by geolocation api
-function Startposition(map)
+function Startposition(map, locateButton)
 {
     // called when geolocation api caused an errors
 	this.geolocationError = function(error)
@@ -53,19 +53,11 @@ function Startposition(map)
 	}
 
 
-	this.map = map;
-
-	// if no position set
-	if (!this.map.getCenter())
+	// main locating function
+	this.setPosition = function()
 	{
-		if (params['lat'] && params['lon'])
-		{
-			if (!params['zoom'])
-				params['zoom'] = 17;
-			this.map.setCenter(getMapLatLon(params['lat'], params['lon']), params['zoom']);
-		}
 		// if geolocation is available
-		else if ((navigator.geolocation) && (typeof navigator.geolocation.getCurrentPosition != 'undefined'))
+		if ((navigator.geolocation) && (typeof navigator.geolocation.getCurrentPosition != 'undefined'))
 		{
 			var self = this;
 			// call function to jump to geolocated position
@@ -91,6 +83,23 @@ function Startposition(map)
 		}
 	}
 
+
+	this.map = map;
+	this.locateButton = gEBI(locateButton);
+
+	// if no position set
+	if (!this.map.getCenter())
+	{
+		if (params['lat'] && params['lon'])
+		{
+			if (!params['zoom'])
+				params['zoom'] = 17;
+			this.map.setCenter(getMapLatLon(params['lat'], params['lon']), params['zoom']);
+		}
+		else
+			this.setPosition();
+	}
+
 	// if position already set, create popup
 	if (params['id'] && params['type'])
 	{
@@ -101,6 +110,13 @@ function Startposition(map)
 			showMoreInfo(params['id'], params['type'], params['lat'], params['lon']);
 	}
 
+
+	// onclick event of locate button
+	var self = this;
+	this.locateButton.onclick = function()
+		{
+			self.setPosition();
+		};
 
 	// load markers without moving the map first
 	map.setCenter(map.getCenter());
