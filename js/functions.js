@@ -181,7 +181,7 @@ function createMap()
 	search = new Search(map, "searchBox", "searchBar", "searchButton", "clearButton", "searchOption");
 
 	// setting start position
-	var startposition = new Startposition(map, "locateButton");
+	startposition = new Startposition(map, "locateButton");
 
 	// adding fullscreen feature
 	fullscreen = new Fullscreen("fullscreen", "moreImage");
@@ -303,6 +303,7 @@ function hoverSidebar()
 		return false;
 
 	gEBI("mapFrame").className = "mapFrameOut";
+	startposition.locateButton.className = "locateButton";
 	gEBI("hideSidebarButton").className = "hideSidebarButton";
 }
 
@@ -314,6 +315,7 @@ function unhoverSidebar()
 		return false;
 
 	gEBI("mapFrame").className = "mapFrame";
+	startposition.locateButton.className = "locateButtonFalse";
 	if (gEBI("sideBar").className == "sideBarOut")
 		gEBI("hideSidebarButton").className = "hideSidebarButtonFalse";
 }
@@ -339,6 +341,7 @@ function showSideBar()
 	gEBI("hideText").innerHTML = '«';
 	gEBI('searchBox').focus();
 	gEBI("mapFrame").className = "mapFrameOut";
+	startposition.locateButton.className = "locateButton";
 	updateMap();
 }
 
@@ -354,6 +357,7 @@ function hideSideBar()
 	button.title = translations['show'];
 	gEBI("hideText").innerHTML = '»';
 	gEBI("mapFrame").className = "mapFrame";
+	startposition.locateButton.className = "locateButtonFalse";
 	updateMap();
 }
 

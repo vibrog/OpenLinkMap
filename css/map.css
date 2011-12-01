@@ -943,7 +943,7 @@ noscript p
 	height: 16px;
 }
 
-/* button for hiding sideBar*/
+/* button for hiding sideBar */
 .hideSidebarButton
 {
 	position: absolute;
@@ -1056,12 +1056,20 @@ noscript p
 	box-shadow: 0px 0px 8px #aaa;
 }
 
-#locateButton
+.locateButton
 {
 	position: absolute;
 	left: 318px;
 	top: 320px;
-	z-index: 100;
+	z-index: 10000;
+}
+
+.locateButtonFalse
+{
+	position: absolute;
+	left: 38px;
+	top: 320px;
+	z-index: 10000;
 }
 
 #locateButton:hover
