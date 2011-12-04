@@ -1061,7 +1061,7 @@ noscript p
 	position: absolute;
 	left: 318px;
 	top: 320px;
-	z-index: 10000;
+	z-index: 1000;
 }
 
 .locateButtonFalse
@@ -1069,7 +1069,7 @@ noscript p
 	position: absolute;
 	left: 38px;
 	top: 320px;
-	z-index: 10000;
+	z-index: 1000;
 }
 
 #locateButton:hover
