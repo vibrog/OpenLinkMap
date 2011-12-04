@@ -128,15 +128,15 @@
 					}
 					$tags = '';
 				}
-				else if (substr(trim($line), 0, 5) == "<create")
+				else if (substr(trim($line), 0, 7) == "<create")
 				{
 					$action = 0;
 				}
-				else if (substr(trim($line), 0, 5) == "<modify")
+				else if (substr(trim($line), 0, 7) == "<modify")
 				{
 					$action = 1;
 				}
-				else if (substr(trim($line), 0, 5) == "<delete")
+				else if (substr(trim($line), 0, 7) == "<delete")
 				{
 					$action = 2;
 				}
