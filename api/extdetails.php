@@ -526,6 +526,7 @@
 				$output .= "</div>\n";
 			}
 
+			/*
 			// panorama
 			if (substr($response['panorama'], 0, 28) == "http://upload.wikimedia.org/")
 			{
@@ -538,6 +539,7 @@
 				$output .= "</table>\n";
 				$output .= "</div>\n";
 			}
+			*/
 
 			$output .= "</div>\n";
 

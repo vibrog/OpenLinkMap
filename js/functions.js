@@ -187,7 +187,7 @@ function createMap()
 	fullscreen = new Fullscreen("fullscreen", "moreImage");
 
 	// adding panorama feature
-	panorama = new Panorama("fullscreen", "morePanorama");
+	//panorama = new Panorama("fullscreen", "morePanorama");
 }
 
 
