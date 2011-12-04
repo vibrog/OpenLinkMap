@@ -341,7 +341,7 @@ function showSideBar()
 	gEBI("hideText").innerHTML = '«';
 	gEBI('searchBox').focus();
 	gEBI("mapFrame").className = "mapFrameOut";
-	startposition.locateButton.className = "locateButton";
+	gEBI("locateButton").className = "locateButton";
 	updateMap();
 }
 
@@ -439,7 +439,7 @@ function getNames(cluster)
 }
 
 
-
+// create popup and zoom on it
 function zoomOnObject(lat, lon, id, type)
 {
 	var position = getMapLatLon(lat, lon);
@@ -471,7 +471,7 @@ function showMoreInfo(id, type, lat, lon)
 				detailsbar.innerHTML = content;
 				detailsbar.innerHTML += "<div class='loadingMoreInfo'>"+loading+"</div>";
 				fullscreen.init();
-				panorama.init();
+				//panorama.init();
 			}
 			else
 			{
@@ -539,18 +539,25 @@ function editPopupContent(content, lat, lon, type, id)
 	var lat = position.lat;
 	var lon = position.lon;
 
-	var ext = gEBI('detailsBar').className == 'infoBar' ? 1 : 0;
-
 	// add some links to the bottom of a popup
 	content +=
 		'</div><br /><small id="popupLinks">'+
 		'<b><a id="moreInfoLink" href="javascript:showMoreInfo('+id+',\''+type+'\', '+lat+', '+lon+')">'+translations['more']+' >></a></b>'+
-		'&nbsp;&nbsp;<a id="permalink" href="'+root+'?'+queryLatLonZoom(lat, lon, map.getZoom())+'&id='+id+'&type='+type+'&ext='+ext+'">'+translations['permalink']+'</a>'+
+		'&nbsp;&nbsp;<a id="permalink" href="javascript:getPermalink('+id+',\''+type+'\', '+lat+', '+lon+')">'+translations['permalink']+'</a>'+
 		'&nbsp;&nbsp;<a href="http://www.openstreetmap.org/edit?'+queryLatLonZoom(lat, lon, map.getZoom())+'&'+type+'='+id+'&editor=potlatch2" target="_blank">Potlatch</a>'+
 		'&nbsp;&nbsp;<a href="http://localhost:8111/load_and_zoom?left='+l+'&right='+r+'&top='+t+'&bottom='+b+'&select='+type+id+'" target="josm" onclick="return josm(this.href)">JOSM</a>'+
 		'&nbsp;&nbsp;<a href="http://www.openstreetmap.org/browse/'+type+'/'+id+'" target="_blank">'+translations['details']+'</a>'+
 		'&nbsp;&nbsp;<a href="javascript:getEmbedLink('+id+',\''+type+'\')">'+translations['embed']+'</a></small>';
 	return content;
+}
+
+
+function getPermalink(id, type, lat, lon)
+{
+	var ext = gEBI('detailsBar').className == 'infoBar' ? 1 : 0;
+
+	// reload with permalink
+	window.location.replace(root+'?'+queryLatLonZoom(lat, lon, map.getZoom())+'&id='+id+'&type='+type+'&ext='+ext);
 }
 
 
