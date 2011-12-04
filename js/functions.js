@@ -9,7 +9,7 @@ See olm.openstreetmap.de/info for details.
 // main function, creates map and layers, controls other functions
 function createMap()
 {
-	root = "http://openlinkmap.org/";
+	root = "http://www.openlinkmap.org/";
 	loading = "<img class='loading' src='"+root+"/img/loading.gif'><br>"+translations['loading'];
 	// counter of clusterpopup's ids
 	cluster = 0;

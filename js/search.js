@@ -25,6 +25,7 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 		this.resultCount = 1;
 		this.excludeList = "";
 		this.extent = {};
+		this.panned = false;
     }
 
 	// sends a search request
@@ -46,7 +47,7 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 		}
 
 		// if a new string was entered or other search type
-		if (input != this.request || bounded != this.bounded || bounds != this.bounds)
+		if (input != this.request || bounded != this.bounded || ((bounds != this.bounds) && (!this.panned)))
 		{
 			this.reset();
 		}
@@ -124,7 +125,8 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 				// display name
 				if (details.length > 1)
 				{
-					this.setExtent(lat, lon);
+					if (this.bounded == 0)
+						this.setExtent(lat, lon);
 					// translation of object types into user's language
 					var placeType = this.getTagTranslation(key, value);
 					var description = this.getDescription(details);
@@ -305,6 +307,7 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 			this.extent[2] = lat;
 			this.extent[3] = lon;
 		}
+		this.panned = true;
 	}
 
 	// sets a bbox around of all results
@@ -368,6 +371,7 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 	this.even = false;
 	this.bounds = {};
 	this.extent = {};
+	this.panned = false;
 
 	var self = this;
 	this.searchButton.onclick = function()
