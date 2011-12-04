@@ -36,6 +36,7 @@
 			"isolatedsmoking" => "Area fumatori isolata",
 			"beer" => "Birra",
 			"microbrew" => "con microbirrificio",
+			"biergarten" => "Birreria all'aperto",
 			"diesel" => "Diesel",
 			"gtldiesel" => "Diesel, alta qualità sintetico",
 			"hgvdiesel" => "Diesel per autotreni",

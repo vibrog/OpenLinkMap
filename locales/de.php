@@ -36,6 +36,7 @@
 			"isolatedsmoking" => "Raucherräume",
 			"beer" => "Biersorten",
 			"microbrew" => "mit Hausbrauerei",
+			"biergarten" => "Biergarten",
 			"diesel" => "Diesel",
 			"gtldiesel" => "Diesel, teilsynthetisch",
 			"hgvdiesel" => "LKW-Diesel",

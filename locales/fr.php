@@ -36,6 +36,7 @@
 			"isolatedsmoking" => "Fumoir",
 			"beer" => "Bière",
 			"microbrew" => "par brasserie",
+			"biergarten" => "Terrasse",
 			"diesel" => "Gazole",
 			"gtldiesel" => "Synthétique Diesel",
 			"hgvdiesel" => "Poids lourd Diesel",

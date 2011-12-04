@@ -85,6 +85,8 @@
 				tags->'stars' AS \"stars\",
 				tags->'cuisine' AS \"cuisine\",
 				tags->'smoking' AS \"smoking\",
+				tags->'biergarten' AS \"biergarten\",
+				tags->'beer_garden' AS \"beer_garden\",
 				tags->'brewery' AS \"beer\",
 				tags->'microbrewery' AS \"microbrewery\",
 				tags->'fuel:diesel' AS \"diesel\",
@@ -280,6 +282,9 @@
 					// microbrewery
 					if ($response['microbrewery'] == "yes")
 						$output .= "<tr><td><span>".$translations['captions']['microbrew']."</td></tr>\n";
+					// biergarten
+					if (($response['biergarten'] == "yes") || ($response['beer_garden'] == "yes"))
+						$output .= "<tr><td><span>".$translations['captions']['biergarten']."</td></tr>\n";
 				$output .= "</table>\n";
 				$output .= "</div>\n";
 			}
@@ -744,6 +749,9 @@
 					// microbrewery
 					if ($response['microbrewery'] == "yes")
 						$output .= "<microbrewery />\n";
+					// biergarten
+					if (($response['biergarten'] == "yes") || ($response['beer_garden'] == "yes"))
+						$output .= "<biergarten />\n";
 				$output .= "</gastronomy>\n";
 			}
 

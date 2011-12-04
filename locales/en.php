@@ -36,6 +36,7 @@
 			"isolatedsmoking" => "Isolated smoking area",
 			"beer" => "Beer",
 			"microbrew" => "with microbrewery",
+			"biergarten" => "Beer garden",
 			"diesel" => "Diesel",
 			"gtldiesel" => "Diesel, high quality synthetic",
 			"hgvdiesel" => "HGV Diesel",
