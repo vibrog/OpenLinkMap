@@ -120,7 +120,7 @@ function Startposition(map, locateButton)
 	var self = this;
 	this.locateButton.onclick = function()
 		{
-			self.setPosition();
+			self.geolocate();
 		};
 
 	// load markers without moving the map first
