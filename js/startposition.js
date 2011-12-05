@@ -12,9 +12,6 @@ function Startposition(map, locateButton)
     // called when geolocation api caused an errors
 	this.geolocationError = function(error)
 	{
-		if((error.code >= 0) && (error.code <= 3))
-			this.setPosition();
-
 		return true;
 	}
 
