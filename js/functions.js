@@ -177,11 +177,11 @@ function createMap()
 	// loading timestamp
 	var timestamp = new Timestamp("info");
 
-	// creating search
-	search = new Search(map, "searchBox", "searchBar", "searchButton", "clearButton", "searchOption");
-
 	// setting start position
 	startposition = new Startposition(map, "locateButton");
+
+	// creating search
+	search = new Search(map, "searchBox", "searchBar", "searchButton", "clearButton", "searchOption");
 
 	// adding fullscreen feature
 	fullscreen = new Fullscreen("fullscreen", "moreImage");
