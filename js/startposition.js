@@ -13,7 +13,7 @@ function Startposition(map, locateButton)
 	this.geolocationError = function(error)
 	{
 		if((error.code >= 0) && (error.code <= 3))
-			this.setPositionByIp();
+			this.setPosition();
 
 		return true;
 	}
@@ -41,8 +41,8 @@ function Startposition(map, locateButton)
 				if ((response.length > 0) && (response != "NULL"))
 				{
 					response = response.split(",");
-					self.map.panTo(getMapLatLon(response[1], response[0]));
-					self.map.zoomTo(10);
+					self.map.setCenter(getMapLatLon(response[1], response[0]), 10);
+					self.geolocate();
 					return true;
 				}
 				else
@@ -54,10 +54,10 @@ function Startposition(map, locateButton)
 
 
 	// main locating function
-	this.setPosition = function()
+	this.geolocate = function()
 	{
 		// if geolocation is available
-		if ((navigator.geolocation) && (typeof navigator.geolocation.getCurrentPosition != 'undefined'))
+		if (navigator.geolocation)
 		{
 			var self = this;
 			// call function to jump to geolocated position
@@ -72,8 +72,13 @@ function Startposition(map, locateButton)
 				}
 			);
 		}
-		// set position by user's ip address, otherwise set to fixed position
-		else if (!this.setPositionByIp())
+	}
+
+
+	// locating by ip or fixed latlon
+	this.setPosition = function()
+	{
+		if (!this.setPositionByIp())
 		{
 			// position to zoom on if no permalink is given and geolocation isn't supported
 			var lat = 51.58248;
