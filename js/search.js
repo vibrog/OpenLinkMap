@@ -342,12 +342,12 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 	// sets bounded option
 	this.setBounded = function(value)
 	{
+		this.bounded = value;
+
 		if (this.bounded == 1)
 			this.option.checked = true;
 		else
 			this.option.checked = false;
-
-		this.bounded = value;
 	}
 
 	this.resultClick = function(feature)
@@ -384,9 +384,7 @@ function Search(map, box, bar, searchButton, clearButton, searchOption)
 		};
 
 	this.box.focus();
-
-	if (params['bounded'] == 1)
-		this.setBounded(1);
+	this.setBounded(params['bounded']);
 
 	// set up key event
 	this.box.onkeydown =
