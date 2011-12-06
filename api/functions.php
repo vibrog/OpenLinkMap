@@ -892,6 +892,8 @@
 					( ((int)$daybounds[0] != 0) && ((int)$daybounds[1] != 0) && ((int)$daybounds[1] < (int)$daybounds[0]) && ($actday >= (int)$daybounds[0]) && ($actday <= 6) && ($actday >= 0) && ($actday <= (int)$daybounds[1]) ) ||
 					// e.g. Th-Mo
 					( ((int)$daybounds[1] == 0) && ($actday >= (int)$daybounds[0]) && ($actday <= 6) && ((int)$daybounds[0] != (int)$daybounds[1]) ) ||
+					// e.g. Su-Th
+					( ((int)$daybounds[0] != 0) && ((int)$daybounds[1] != 0) && ((int)$daybounds[1] < (int)$daybounds[0]) && ($actday <= (int)$daybounds[0]) && ($actday <= (int)$daybounds[1]) && ((int)$daybounds[0] == 6)) ||
 					// e.g. We
 					( ((int)$daybounds[0] == (int)$daybounds[1]) && ($actday == (int)$daybounds[0]) )
 				)
