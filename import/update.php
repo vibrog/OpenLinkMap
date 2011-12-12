@@ -84,8 +84,8 @@
 				$line = fgets($file);
 				if (substr(trim($line), 0, 5) == "<node")
 				{
-					$id = explode("\" lat", $line);
-					$id = intval(substr($id[0], 11));
+					$id = substr($line, 11);
+					$id = intval(substr($id, 0, strpos($id, "\"")));
 
 					$lat = explode("\" lon=", $line);
 					$lat = explode("lat=\"", $lat[0]);
@@ -106,6 +106,8 @@
 						$id = $id-($offset*$offsetfactorrels);
 					else if ($type == "ways")
 						$id = $id-$offset;
+					if (((substr(trim($line), -2, 1) == "/") && ($action == 2)))
+						$result = pg_query($connection, "DELETE FROM ".$type." WHERE (id = '".$id."')");
 				}
 				else if (substr(trim($line), 0, 4) == "<tag")
 				{
@@ -115,7 +117,7 @@
 					else
 						$tags .= ',"'.substr($tag[0], 10).'"=>"'.substr($tag[1], 0, -4).'"';
 				}
-				else if (trim($line) == "</node>")
+				else if ((trim($line) == "</node>"))
 				{
 					if ($action == 0)
 						$result = pg_query($connection, "INSERT INTO ".$type." (id, tags, geom) VALUES ('".$id."', '".$tags."', GeometryFromText('POINT ( ".$lon." ".$lat." )', 4326 ))");
