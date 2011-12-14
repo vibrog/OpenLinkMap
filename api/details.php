@@ -42,10 +42,6 @@
 
 		// request
 		$request = "SELECT
-				tags->'name' AS \"name\",
-				tags->'name:".$langs[0]."' AS \"name1\",
-				tags->'name:".$langs[1]."' AS \"name2\",
-				tags->'name:".$langs[2]."' AS \"name3\",
 				tags->'addr:street' AS \"street\",
 				tags->'addr:housenumber' AS \"housenumber\",
 				tags->'addr:country' AS \"country\",
