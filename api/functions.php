@@ -778,12 +778,44 @@
 
 
 	// returns the name wich matches most the user's language
-	function getNameDetail($names)
+	function getNameDetail($langs, $names)
 	{
-		if ($names[0])
-			return $names[0];
+		// do translation of name
+		if (count($names) > 0)
+		{
+			// select name in most matching language
+			foreach ($langs as $lang)
+			{
+				foreach ($names as $caption)
+				{
+					$tmplang = substr($caption['keys'], 5, 2);
+					if ($lang == $tmplang)
+					{
+						$namelang = $tmplang;
+						$name = $caption['values'];
+						break 2;
+					}
+				}
+			}
+			// if no name for a specific language was found, use standard name=*
+			if (!isset($name))
+			{
+				foreach ($names as $caption)
+				{
+					if ($caption['keys'] == "name")
+					{
+						$namelang = false;
+						$name = $caption['values'];
+						break;
+					}
+				}
+			}
+		}
 		else
-			return $names[count($names)-1];
+			return false;
+
+		// return values as array
+		return array($name, $namelang);
 	}
 
 

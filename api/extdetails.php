@@ -42,10 +42,6 @@
 
 		// request
 		$request = "SELECT
-				tags->'name' AS \"name\",
-				tags->'name:".$langs[0]."' AS \"name1\",
-				tags->'name:".$langs[1]."' AS \"name2\",
-				tags->'name:".$langs[2]."' AS \"name3\",
 				tags->'addr:street' AS \"street\",
 				tags->'addr:housenumber' AS \"housenumber\",
 				tags->'addr:country' AS \"country\",
@@ -53,9 +49,6 @@
 				tags->'addr:city' AS \"city\",
 				tags->'addr:housename' AS \"housename\",
 				tags->'wikipedia' AS \"wikipedia\",
-				tags->'wikipedia:".$langs[0]."' AS \"wikipedia1\",
-				tags->'wikipedia:".$langs[1]."' AS \"wikipedia2\",
-				tags->'wikipedia:".$langs[2]."' AS \"wikipedia3\",
 				tags->'phone' AS \"phone1\",
 				tags->'contact:phone' AS \"phone2\",
 				tags->'addr:phone' AS \"phone3\",
@@ -138,6 +131,17 @@
 							) AS foo
 							WHERE substring(foo.keys from 1 for 9) = 'wikipedia';";
 
+		$namerequest = "SELECT
+								foo.keys, foo.values
+							FROM (
+								SELECT
+									skeys(tags) AS keys,
+									svals(tags) AS values
+								FROM ".$type."s
+								WHERE (id = ".$id.")
+							) AS foo
+							WHERE substring(foo.keys from 1 for 4) = 'name';";
+
 		// connnecting to database
 		$connection = connectToDatabase($db);
 		// if there is no connection
@@ -146,15 +150,16 @@
 
 		$response = requestDetails($request, $connection);
 		$wikipediaresponse = requestDetails($wikipediarequest, $connection);
+		$nameresponse = requestDetails($namerequest, $connection);
 
 		pg_close($connection);
 
 		if ($response)
 		{
 			if ($format == "text")
-				echo textMoredetailsOut($response[0], $langs, $offset);
+				echo textMoredetailsOut($response[0], $nameresponse, $wikipediaresponse, $langs, $offset);
 			else
-				echo xmlMoredetailsOut($response[0], $langs, $offset, $id, $type);
+				echo xmlMoredetailsOut($response[0], $nameresponse, $wikipediaresponse, $langs, $offset, $id, $type);
 
 			return true;
 		}
@@ -164,7 +169,7 @@
 
 
 	// text/html output of extdetails
-	function textMoredetailsOut($response, $wikipediaresponse, $langs, $offset = 0)
+	function textMoredetailsOut($response, $nameresponse, $wikipediaresponse, $langs, $offset = 0)
 	{
 		global $translations;
 
@@ -174,7 +179,7 @@
 			header("Content-Type: text/html; charset=UTF-8");
 			$output = "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">";
 
-			$name = getNameDetail(array($response["name1"], $response["name2"], $response["name3"], $response["name"]));
+			$name = getNameDetail($langs, $nameresponse);
 
 			$phone = getPhoneFaxDetail(array($response['phone1'], $response['phone2'], $response['phone3']));
 			$phonenumber = $phone[0];
@@ -202,7 +207,7 @@
 			{
 				$output .= "<div class=\"moreInfoBox\">\n";
 					$output .= "<center>";
-						$output .= "<dfn><b>".$name."</b></dfn><br />\n";
+						$output .= "<dfn><b>".$name[0]."</b></dfn><br />\n";
 						if ($response['description'])
 							$output .= "<dfn>".$response['description']."</dfn><br />\n";
 					$output .= "</center>\n";
@@ -568,13 +573,13 @@
 
 
 	// output of details data in xml format
-	function xmlMoreDetailsOut($response, $wikipediaresponse, $langs = "en", $offset = 0, $id, $type)
+	function xmlMoreDetailsOut($response, $nameresponse, $wikipediaresponse, $langs = "en", $offset = 0, $id, $type)
 	{
 		if ($response)
 		{
 			$output = xmlStart("moredetails id=\"".$id."\" type=\"".$type."\"");
 
-			$name = getNameDetail(array($response["name1"], $response["name2"], $response["name3"], $response["name"]));
+			$name = getNameDetail($langs, $nameresponse);
 
 			$phone = getPhoneFaxDetail(array($response['phone1'], $response['phone2'], $response['phone3']));
 			$phone = $phone[1];
@@ -598,9 +603,9 @@
 			if ($name)
 			{
 				$output .= "<name";
-				if ($name == $response["name1"])
-					$output .= " lang=\"".$langs[0]."\"";
-				$output .= ">".$name."</name>\n";
+				if ($name[0])
+					$output .= " lang=\"".$name[1]."\"";
+				$output .= ">".$name[0]."</name>\n";
 			 }
 
 			 if ($response['description'])

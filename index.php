@@ -65,7 +65,7 @@
 				echo "bounded : ".(((isset($_GET['bounded'])) && ($_GET['bounded'] == 1)) ? 1 : 0).",\n";
 				echo "offset : ".(isset($_GET['offset']) ? ($_GET['offset']) : ("null")).",\n";
 				echo "searchquery : \"".(isset($_GET['q']) ? ($_GET['q']) : (""))."\",\n";
-				echo "lang : \"".$lang."\"\n";
+				echo "lang : \"".$_GET['lang']."\"\n";
 				echo "};\n";
 			echo "</script>\n";
 		?>

@@ -80,6 +80,17 @@
 							) AS foo
 							WHERE substring(foo.keys from 1 for 9) = 'wikipedia';";
 
+		$namerequest = "SELECT
+								foo.keys, foo.values
+							FROM (
+								SELECT
+									skeys(tags) AS keys,
+									svals(tags) AS values
+								FROM ".$type."s
+								WHERE (id = ".$id.")
+							) AS foo
+							WHERE substring(foo.keys from 1 for 4) = 'name';";
+
 		// connnecting to database
 		$connection = connectToDatabase($db);
 		// if there is no connection
@@ -88,15 +99,16 @@
 
 		$response = requestDetails($request, $connection);
 		$wikipediaresponse = requestDetails($wikipediarequest, $connection);
+		$nameresponse = requestDetails($namerequest, $connection);
 
 		pg_close($connection);
 
 		if ($response)
 		{
 			if ($format == "text")
-				echo textDetailsOut($response[0], $wikipediaresponse, $langs, $offset);
+				echo textDetailsOut($response[0], $nameresponse, $wikipediaresponse, $langs, $offset);
 			else
-				echo xmlDetailsOut($response[0], $wikipediaresponse, $langs, $offset, $id, $type);
+				echo xmlDetailsOut($response[0], $nameresponse, $wikipediaresponse, $langs, $offset, $id, $type);
 
 			return true;
 		}
@@ -106,7 +118,7 @@
 
 
 	// output of details data in plain text format
-	function textDetailsOut($response, $wikipediaresponse, $langs = "en", $offset = 0)
+	function textDetailsOut($response, $nameresponse, $wikipediaresponse, $langs = "en", $offset = 0)
 	{
 		global $translations;
 
@@ -116,7 +128,7 @@
 			header("Content-Type: text/html; charset=UTF-8");
 			$output = "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">";
 
-			$name = getNameDetail(array($response["name1"], $response["name2"], $response["name3"], $response["name"]));
+			$name = getNameDetail($langs, $nameresponse);
 
 			$phone = getPhoneFaxDetail(array($response['phone1'], $response['phone2'], $response['phone3']));
 			$phonenumber = $phone[0];
@@ -143,7 +155,7 @@
 			if ($name)
 			{
 				$output .= "<div class=\"container hcard vcard\"><div class=\"header\">\n";
-				$output .= "<strong class=\"name\">".$name."</strong>\n";
+				$output .= "<strong class=\"name\">".$name[0]."</strong>\n";
 				$output .= "</div>\n";
 			}
 
@@ -237,13 +249,13 @@
 
 
 	// output of details data in xml format
-	function xmlDetailsOut($response, $wikipediaresponse, $langs = "en", $offset = 0, $id, $type)
+	function xmlDetailsOut($response, $nameresponse, $wikipediaresponse, $langs = "en", $offset = 0, $id, $type)
 	{
 		if ($response)
 		{
 			$output = xmlStart("details id=\"".$id."\" type=\"".$type."\"");
 
-			$name = getNameDetail(array($response["name1"], $response["name2"], $response["name3"], $response["name"]));
+			$name = getNameDetail($langs, $nameresponse);
 
 			$phone = getPhoneFaxDetail(array($response['phone1'], $response['phone2'], $response['phone3']));
 			$phone = $phone[1];
@@ -268,10 +280,10 @@
 			if ($name)
 			{
 				$output .= "<name";
-				if ($name == $response["name1"])
-					$output .= " lang=\"".$langs[0]."\"";
-				$output .= ">".$name."</name>\n";
-			 }
+				if ($name[0])
+					$output .= " lang=\"".$name[1]."\"";
+				$output .= ">".$name[0]."</name>\n";
+			}
 
 			// address information
 			if ($response['street'] || $response['housenumber'] || $response['country'] || $response['postcode'] || $response['city'])
