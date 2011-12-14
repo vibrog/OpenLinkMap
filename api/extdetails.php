@@ -127,6 +127,17 @@
 				tags->'wheelchair:places' AS \"wheelchair:places\"
 			FROM ".$type."s WHERE (id = ".$id.");";
 
+		$wikipediarequest = "SELECT
+								foo.keys, foo.values
+							FROM (
+								SELECT
+									skeys(tags) AS keys,
+									svals(tags) AS values
+								FROM ".$type."s
+								WHERE (id = ".$id.")
+							) AS foo
+							WHERE substring(foo.keys from 1 for 9) = 'wikipedia';";
+
 		// connnecting to database
 		$connection = connectToDatabase($db);
 		// if there is no connection
@@ -134,6 +145,7 @@
 			exit;
 
 		$response = requestDetails($request, $connection);
+		$wikipediaresponse = requestDetails($wikipediarequest, $connection);
 
 		pg_close($connection);
 
@@ -152,7 +164,7 @@
 
 
 	// text/html output of extdetails
-	function textMoredetailsOut($response, $langs, $offset = 0)
+	function textMoredetailsOut($response, $wikipediaresponse, $langs, $offset = 0)
 	{
 		global $translations;
 
@@ -180,7 +192,7 @@
 			$email = getMailDetail(array($response['email1'], $response['email2'], $response['email3']));
 
 			// get wikipedia link and make translation
-			$wikipedia = getWikipediaDetail($langs, array($response['wikipedia1'], $response['wikipedia2'], $response['wikipedia3'], $response['wikipedia']));
+			$wikipedia = getWikipediaDetail($langs, $wikipediaresponse);
 
 			$openinghours = getOpeninghoursDetail($response['openinghours']);
 			$servicetimes = getOpeninghoursDetail($response['servicetimes']);
@@ -556,7 +568,7 @@
 
 
 	// output of details data in xml format
-	function xmlMoreDetailsOut($response, $langs = "en", $offset = 0, $id, $type)
+	function xmlMoreDetailsOut($response, $wikipediaresponse, $langs = "en", $offset = 0, $id, $type)
 	{
 		if ($response)
 		{
@@ -578,7 +590,7 @@
 			$email = getMailDetail(array($response['email1'], $response['email2'], $response['email3']));
 
 			// get wikipedia link and make translation
-			$wikipedia = getWikipediaDetail($langs, array($response['wikipedia1'], $response['wikipedia2'], $response['wikipedia3'], $response['wikipedia']));
+			$wikipedia = getWikipediaDetail($langs, $wikipediaresponse);
 
 			$openinghours = getOpeninghoursDetail($response['openinghours']);
 

@@ -51,16 +51,15 @@
 				tags->'addr:country' AS \"country\",
 				tags->'addr:postcode' AS \"postcode\",
 				tags->'addr:city' AS \"city\",
-				tags->'wikipedia' AS \"wikipedia\",
-				tags->'wikipedia:".$langs[0]."' AS \"wikipedia1\",
-				tags->'wikipedia:".$langs[1]."' AS \"wikipedia2\",
-				tags->'wikipedia:".$langs[2]."' AS \"wikipedia3\",
 				tags->'phone' AS \"phone1\",
 				tags->'contact:phone' AS \"phone2\",
 				tags->'addr:phone' AS \"phone3\",
-				tags->'fax' AS \"fax1\", tags->'contact:fax' AS \"fax2\",
-				tags->'addr:fax' AS \"fax3\", tags->'website' AS \"website1\",
-				tags->'url' AS \"website2\", tags->'url:official' AS \"website3\",
+				tags->'fax' AS \"fax1\",
+				tags->'contact:fax' AS \"fax2\",
+				tags->'addr:fax' AS \"fax3\",
+				tags->'website' AS \"website1\",
+				tags->'url' AS \"website2\",
+				tags->'url:official' AS \"website3\",
 				tags->'contact:website' AS \"website4\",
 				tags->'operator' AS \"operator\",
 				tags->'email' AS \"email1\",
@@ -70,6 +69,17 @@
 				tags->'service_times' AS \"servicetimes\"
 			FROM ".$type."s WHERE (id = ".$id.");";
 
+		$wikipediarequest = "SELECT
+								foo.keys, foo.values
+							FROM (
+								SELECT
+									skeys(tags) AS keys,
+									svals(tags) AS values
+								FROM ".$type."s
+								WHERE (id = ".$id.")
+							) AS foo
+							WHERE substring(foo.keys from 1 for 9) = 'wikipedia';";
+
 		// connnecting to database
 		$connection = connectToDatabase($db);
 		// if there is no connection
@@ -77,15 +87,16 @@
 			exit;
 
 		$response = requestDetails($request, $connection);
+		$wikipediaresponse = requestDetails($wikipediarequest, $connection);
 
 		pg_close($connection);
 
 		if ($response)
 		{
 			if ($format == "text")
-				echo textDetailsOut($response[0], $langs, $offset);
+				echo textDetailsOut($response[0], $wikipediaresponse, $langs, $offset);
 			else
-				echo xmlDetailsOut($response[0], $langs, $offset, $id, $type);
+				echo xmlDetailsOut($response[0], $wikipediaresponse, $langs, $offset, $id, $type);
 
 			return true;
 		}
@@ -95,7 +106,7 @@
 
 
 	// output of details data in plain text format
-	function textDetailsOut($response, $langs = "en", $offset = 0)
+	function textDetailsOut($response, $wikipediaresponse, $langs = "en", $offset = 0)
 	{
 		global $translations;
 
@@ -123,7 +134,7 @@
 			$email = getMailDetail(array($response['email1'], $response['email2'], $response['email3']));
 
 			// get wikipedia link and make translation
-			$wikipedia = getWikipediaDetail($langs, array($response['wikipedia1'], $response['wikipedia2'], $response['wikipedia3'], $response['wikipedia']));
+			$wikipedia = getWikipediaDetail($langs, $wikipediaresponse);
 
 			$openinghours = getOpeninghoursDetail($response['openinghours']);
 			$servicetimes = getOpeninghoursDetail($response['servicetimes']);
@@ -226,7 +237,7 @@
 
 
 	// output of details data in xml format
-	function xmlDetailsOut($response, $langs = "en", $offset = 0, $id, $type)
+	function xmlDetailsOut($response, $wikipediaresponse, $langs = "en", $offset = 0, $id, $type)
 	{
 		if ($response)
 		{
@@ -248,7 +259,7 @@
 			$email = getMailDetail(array($response['email1'], $response['email2'], $response['email3']));
 
 			// get wikipedia link and make translation
-			$wikipedia = getWikipediaDetail($langs, array($response['wikipedia1'], $response['wikipedia2'], $response['wikipedia3'], $response['wikipedia']));
+			$wikipedia = getWikipediaDetail($langs, $wikipediaresponse);
 
 			$openinghours = getOpeninghoursDetail($response['openinghours']);
 			$servicetimes = getOpeninghoursDetail($response['servicetimes']);

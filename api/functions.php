@@ -790,25 +790,30 @@
 	// returns the tag which has a wikipedia link and correct errors in format
 	function getWikipediaDetail($langs, $wikipedias)
 	{
-		$wikipedialang = "";
-		$i = 0;
-
-		// select translation
-		foreach ($wikipedias as $wikipedia)
-		{
-			if ($wikipedia)
-			{
-				$rawwikipedia = $wikipedia;
-				if ($i < (count($wikipedias)-1))
-					$wikipedialang = $langs[$i];
-				break;
-			}
-			$i++;
-		}
-
 		// do translation of wikipedia link
-		if (isset($wikipedia))
+		if (count($wikipedias) > 0)
 		{
+			// select translation
+			foreach ($langs as $lang)
+			{
+				foreach ($wikipedias as $article)
+				{
+					$wplang = substr($article['keys'], 10, 2);
+					if ($lang == $wplang)
+					{
+						$wikipedialang = $wplang;
+						$wikipedia = $article['values'];
+						break 2;
+					}
+				}
+			}
+			// if no tag with explicit language was found, take the first (language doesn't matter because of wikipedia translation)
+			if (!isset($wikipedia))
+			{
+				$wikipedialang = substr($wikipedias[0]['keys'], 10, 2);
+				$wikipedia = $wikipedias[0]['values'];
+			}
+
 			$wikipedia = formatWikipediaLink($wikipedia, $wikipedialang);
 			$wikilink = getWikipediaTranslation($wikipedia[0], $wikipedia[1], $langs);
 			$wikipediatitle = formatWikipediaName($wikilink);
