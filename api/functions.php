@@ -822,6 +822,7 @@
 	// returns the tag which has a wikipedia link and correct errors in format
 	function getWikipediaDetail($langs, $wikipedias)
 	{
+var_dump($wikipedias);
 		// do translation of wikipedia link
 		if (count($wikipedias) > 0)
 		{

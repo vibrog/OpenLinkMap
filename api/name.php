@@ -35,27 +35,26 @@
 
 	// request
 	$request = "SELECT
-			tags->'name' AS \"name\",
-			tags->'name:".$langs[0]."' AS \"name1\"
-		FROM ".$type."s WHERE (id = ".$id.");";
+					foo.keys, foo.values
+					FROM (
+						SELECT
+							skeys(tags) AS keys,
+							svals(tags) AS values
+						FROM ".$type."s
+						WHERE (id = ".$id.")
+					) AS foo
+					WHERE substring(foo.keys from 1 for 4) = 'name';";
 	$response = requestDetails($request, $connection, $type);
 	pg_close($connection);
 
 	if ($response)
 	{
-		$element = $response[0];
-		$name = getNameDetail(array($element["name1"], $element["name"]));
-
-		// check if name or name:** of user's first language was choosen
-		if ($name == $element["name1"])
-			$selectedLang = $langs[0];
-		else
-			$selectedLang = false;
+		$name = getNameDetail($langs, $response);
 
 		if ($format == "xml")
-			echo xmlNameOut($name, $selectedLang, $id, $type);
+			echo xmlNameOut($name[0], $name[1], $id, $type);
 		else
-			echo textNameOut($name);
+			echo textNameOut($name[0]);
 	}
 	else
 		echo "NULL";

@@ -179,7 +179,9 @@
 			header("Content-Type: text/html; charset=UTF-8");
 			$output = "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">";
 
-			$name = getNameDetail($langs, $nameresponse);
+			// translation of name
+			if ($nameresponse)
+				$name = getNameDetail($langs, $nameresponse);
 
 			$phone = getPhoneFaxDetail(array($response['phone1'], $response['phone2'], $response['phone3']));
 			$phonenumber = $phone[0];
@@ -197,7 +199,8 @@
 			$email = getMailDetail(array($response['email1'], $response['email2'], $response['email3']));
 
 			// get wikipedia link and make translation
-			$wikipedia = getWikipediaDetail($langs, $wikipediaresponse);
+			if ($wikipediaresponse)
+				$wikipedia = getWikipediaDetail($langs, $wikipediaresponse);
 
 			$openinghours = getOpeninghoursDetail($response['openinghours']);
 			$servicetimes = getOpeninghoursDetail($response['servicetimes']);

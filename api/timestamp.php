@@ -63,7 +63,7 @@
 		{
 			$difference = timeAgo(time(), $lastupdate, $offset);
 
-			$output = "<last_update>\n";
+			$output = xmlStart("last_update");
 
 			$output .= "<timestamp>\n";
 			$output .= "<unix>".substr($lastupdate, 0, -1)."</unix>\n";
