@@ -70,7 +70,7 @@
 				tags->'fee' AS \"fee\",
 				tags->'toll' AS \"toll\",
 				tags->'ref' AS \"ref\",
-				tags->'capactiy' AS \"capacity\",
+				tags->'capacity' AS \"capacity\",
 				tags->'internet_access' AS \"internet_access\",
 				tags->'image' AS \"image\",
 				tags->'image:panorama' AS \"panorama\",
